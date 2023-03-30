@@ -1,0 +1,25 @@
+<mat-toolbar color="primary">
+    <button mat-button routerLink="">
+        <span>Abarrotes 🍩</span>
+    </button>
+    <button mat-button routerLink="punto_venta" routerLinkActive="active">
+        Punto de Venta
+    </button>
+    <button mat-button routerLink="productos" routerLinkActive="active">
+        Productos
+    </button>
+    <button mat-button routerLink="estadisticas" routerLinkActive="active">
+        Estadísticas
+    </button>
+    <button mat-button routerLink="compras" routerLinkActive="active">
+        Compras
+    </button>
+    <button mat-button routerLink="ventas" routerLinkActive="active">
+        Ventas
+    </button>
+    <span style="flex: 1 1 auto"></span>
+    <button mat-icon-button (click)="lanzarSnackBar()">
+        <mat-icon>favorite</mat-icon>
+    </button>
+</mat-toolbar>
+<router-outlet></router-outlet>
