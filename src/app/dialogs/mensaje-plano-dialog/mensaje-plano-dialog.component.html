@@ -1,0 +1,14 @@
+<h1 mat-dialog-title>
+    <p style="display: flex;
+    align-items: center;">
+        <mat-icon color="primary">brightness_3</mat-icon> &nbsp; {{ data.titulo }}
+    </p>
+</h1>
+
+<div mat-dialog-content>
+    {{ data.contenido }}
+</div>
+
+<mat-dialog-actions align="end">
+    <button mat-button (click)="ok()">Got it</button>
+</mat-dialog-actions>
