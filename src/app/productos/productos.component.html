@@ -1,1 +1,38 @@
-<p>productos works!</p>
+<div class="marco">
+    <div class="row">
+        <div class="col">
+            <h1>Productos</h1>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <h3>Agregar nuevo producto</h3>
+    </div>
+    <div class="row">
+        <form [formGroup]="productoForm" (ngSubmit)="guardar()">
+            <mat-form-field>
+                <mat-label>Nombre</mat-label>
+                <input matInput formControlName="nombre">
+            </mat-form-field>
+            &nbsp;
+            <mat-form-field>
+                <mat-label>Código de Barras</mat-label>
+                <input matInput formControlName="codigo_barras">
+            </mat-form-field>
+            &nbsp;
+            <mat-form-field>
+                <span matPrefix>&nbsp; $ &nbsp;</span>
+                <mat-label>Precio de Compra</mat-label>
+                <input type="number" min="0" matInput formControlName="precio_compra">
+            </mat-form-field>
+            &nbsp;
+            <mat-form-field>
+                <span matPrefix>&nbsp; $ &nbsp;</span>
+                <mat-label>Precio de Venta</mat-label>
+                <input type="number" min="0" matInput formControlName="precio_venta">
+            </mat-form-field>
+            &nbsp;
+            <button mat-flat-button color="accent" type="submit">Agregar</button>
+        </form>
+    </div>
+    <hr>
