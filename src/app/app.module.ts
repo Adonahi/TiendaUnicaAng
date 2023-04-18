@@ -14,6 +14,8 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatTableModule } from '@angular/material/table';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatPaginatorModule } from '@angular/material/paginator'
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -59,6 +61,8 @@ import { MensajeSiNoDialogComponent } from './dialogs/mensaje-si-no-dialog/mensa
     MatTableModule,
     MatProgressSpinnerModule,
     MatPaginatorModule,
+    MatTooltipModule,
+    MatAutocompleteModule,
     FlexLayoutModule,
     ReactiveFormsModule,
     HttpClientModule

@@ -26,6 +26,13 @@ export class ProductoService {
     .pipe(catchError(this.handleError<Producto>()));
   }
 
+  editar(producto: Producto): Observable<Producto> {
+    const url = `${URL}${PRODUCTO}`;
+    return this.http
+    .put<Producto>(url, producto, OPTIONS)
+    .pipe(catchError(this.handleError<Producto>()));
+  }
+
   eliminar(id: number): Observable<Producto>{
     const url = `${URL}${PRODUCTO}/delete/${id}`;
     return this.http

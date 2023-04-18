@@ -33,6 +33,8 @@
             </mat-form-field>
             &nbsp;
             <button mat-flat-button color="accent" type="submit" [disabled]="productoForm.invalid">{{ edit ? "Editar" : "Agregar"}}</button>
+            &nbsp;
+            <button *ngIf="edit" mat-flat-button color="warn" (click)="cancelar()">Cancelar</button>
         </form>
     </div>
     <hr>
@@ -47,17 +49,17 @@
 
             <ng-container matColumnDef="nombre">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</th>
-                <td mat-cell *matCellDef="let row">{{row.nombre}}</td>
+                <td mat-cell *matCellDef="let row">{{row.nombre.charAt(0).toUpperCase() + row.nombre.slice(1)}}</td> 
             </ng-container>
     
             <ng-container matColumnDef="precio_compra">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Precio de Compra</th>
-                <td mat-cell *matCellDef="let row">${{ row.precio_compra }}</td>
+                <td mat-cell *matCellDef="let row">{{ row.precio_compra | currency }}</td>
             </ng-container>
     
             <ng-container matColumnDef="precio_venta">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Precio de Venta</th>
-                <td mat-cell *matCellDef="let row">${{row.precio_venta }}</td>
+                <td mat-cell *matCellDef="let row">{{row.precio_venta | currency }}</td>
             </ng-container>
     
             <ng-container matColumnDef="codigo_barras">
@@ -66,13 +68,13 @@
             </ng-container>
     
             <ng-container matColumnDef="editar">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header>Editar</th>
-                <td mat-cell *matCellDef="let row"><button mat-flat-button color="primary" (click)="editar(row)">Editar</button></td>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+                <td mat-cell *matCellDef="let row"><button mat-mini-fab color="primary" matTooltip="Editar" (click)="editar(row)"><mat-icon>edit</mat-icon></button></td>
             </ng-container>
     
             <ng-container matColumnDef="eliminar">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header>Eliminar</th>
-                <td mat-cell *matCellDef="let row"><button mat-flat-button color="warn" (click)="eliminar(row)">Eliminar</button></td>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+                <td mat-cell *matCellDef="let row"><button mat-mini-fab color="warn" matTooltip="Eliminar" (click)="eliminar(row)"><mat-icon>delete</mat-icon></button></td>
             </ng-container>
     
             <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true" class="example-first-header-row"></tr>

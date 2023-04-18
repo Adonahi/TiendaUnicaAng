@@ -6,7 +6,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { interval } from 'rxjs';
+import { interval, Observable } from 'rxjs';
 import { Producto } from '../classes/producto.class';
 import { MensajeEsperaDialogComponent } from '../dialogs/mensaje-espera-dialog/mensaje-espera-dialog.component';
 import { MensajePlanoDialogComponent } from '../dialogs/mensaje-plano-dialog/mensaje-plano-dialog.component';
@@ -58,109 +58,117 @@ export class ProductosComponent implements AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.productoForm = this._formBuilder.group({
-      producto_id: [''],
-      nombre: ['', Validators.required],
-      codigo_barras: [''],
-      precio_compra: ['', Validators.required],
-      precio_venta: ['', Validators.required]
-    });
+    this.productoForm.patchValue({ producto_id: null, nombre: null, codigo_barras: null, precio_compra: null, precio_venta: null });
 
     this._productoService.getAll()
-    .subscribe((productos: Producto[]) =>{
-      this.isLoadingResults = true;
-      this.dataSource.data = productos;
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
-      this.isLoadingResults = false;
-    });
+      .subscribe((productos: Producto[]) => {
+        this.isLoadingResults = true;
+        this.dataSource.data = productos;
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+        this.isLoadingResults = false;
+      });
 
   }
 
-  editar(producto: Producto){
-    console.log(producto);
+  editar(producto: Producto) {
     this.edit = true;
-    this._productoService.getPorId(producto.producto_id)
-    .subscribe(r =>{
-      
-    });
+    this.productoForm.patchValue({ producto_id: producto.producto_id, nombre: producto.nombre.charAt(0).toUpperCase() + producto.nombre.slice(1), codigo_barras: producto.codigo_barras, precio_compra: producto.precio_compra, precio_venta: producto.precio_venta });
   }
 
-  eliminar(producto: Producto){
+  eliminar(producto: Producto) {
     this.dialog.open(MensajeSiNoDialogComponent, {
-      data:{
+      data: {
         titulo: "Eliminar Producto",
         contenido: "¿Está seguro que desea eliminar " + producto.nombre + "?"
       }
     })
-    .afterClosed()
-    .subscribe(r =>{
-      if(r){
-        this._productoService.eliminar(producto.producto_id)
-        .subscribe((res: any) =>{
-          if(res.error){
-            this.dialog.open(MensajePlanoDialogComponent, {
-              data:{
-                titulo: "Error",
-                contenido: "Error al eliminar"
+      .afterClosed()
+      .subscribe(r => {
+        if (r) {
+          this._productoService.eliminar(producto.producto_id)
+            .subscribe((res: any) => {
+              if (res.error) {
+                this.dialog.open(MensajePlanoDialogComponent, {
+                  data: {
+                    titulo: "Error",
+                    contenido: "Error al eliminar"
+                  }
+                })
+              }
+              else {
+                this.ngAfterViewInit();
               }
             })
-          }
-          else{
-            this.ngAfterViewInit();
-          }
-        })
-      }
-    });
+        }
+      });
   }
 
   guardar() {
     if (this.productoForm.valid) {
       this.dialog.open(MensajeEsperaDialogComponent, {
         data: {
-          titulo: "Insertando",
-          contenido: "Insertando " + this.productoForm.value['nombre']
+          titulo: this.edit ? "Editando" : "Insertando",
+          contenido: (this.edit ? "Editando " : "Insertando ") + this.productoForm.value['nombre']
         },
         disableClose: true
       });
-      this._productoService.insertar(new Producto(
-        0,
-        this.productoForm.value['nombre'],
-        this.productoForm.value['codigo_barras'],
-        this.productoForm.value['precio_compra'],
-        this.productoForm.value['precio_venta'],
-        4,
-        0
-      ))
-        .subscribe((r: any) => {
-          this.dialog.closeAll();
-          if (r.error) {
-            var mensaje = "";
-            for(var i in r.messages) {
-              mensaje += i + ": " + r.messages[i] + "\n";
-            }
-            console.log("rrorrrrrr");
-            this.dialog.open(MensajePlanoDialogComponent, {
-              data:{
-                titulo: "Error al insertar",
-                contenido: mensaje
-              }
-            })
+
+      let obs: Observable<Producto> = this.edit ?
+        this._productoService.editar(new Producto(
+          this.productoForm.value['producto_id'],
+          this.productoForm.value['nombre'].toLowerCase(),
+          this.productoForm.value['codigo_barras'],
+          this.productoForm.value['precio_compra'],
+          this.productoForm.value['precio_venta'],
+          4,
+          0
+        )) :
+        this._productoService.insertar(new Producto(
+          0,
+          this.productoForm.value['nombre'].toLowerCase(),
+          this.productoForm.value['codigo_barras'],
+          this.productoForm.value['precio_compra'],
+          this.productoForm.value['precio_venta'],
+          4,
+          0
+        ));
+
+      obs.subscribe((r: any) => {
+        this.dialog.closeAll();
+        if (r.error) {
+          var mensaje = "";
+          for (var i in r.messages) {
+            mensaje += i + ": " + r.messages[i] + "\n";
           }
-          else {
-            this.dialog.open(MensajePlanoDialogComponent, {
-              data: {
-                titulo: "Insertado",
-                contenido: r.nombre + " se ha insertado correctamente"
-              }
-            })
+          console.log("rrorrrrrr");
+          this.dialog.open(MensajePlanoDialogComponent, {
+            data: {
+              titulo: "Error",
+              contenido: mensaje
+            }
+          })
+        }
+        else {
+          this.dialog.open(MensajePlanoDialogComponent, {
+            data: {
+              titulo: this.edit ? "Editado" : "Insertado",
+              contenido: r.nombre + (this.edit ? " se ha editado correctamente" : " se ha insertado correctamente")
+            }
+          })
             .afterClosed()
-            .subscribe(() =>{
+            .subscribe(() => {
+              this.edit = false;
               this.ngAfterViewInit();
             });
-          }
-        });
+        }
+      });
     }
+  }
+
+  cancelar() {
+    this.edit = false;
+    this.productoForm.patchValue({ producto_id: null, nombre: null, codigo_barras: null, precio_compra: null, precio_venta: null });
   }
 
   curSec: Number = 0;
@@ -172,7 +180,6 @@ export class ProductosComponent implements AfterViewInit {
       this.curSec = sec;
       if (this.curSec === seconds) {
         sub.unsubscribe();
-        //this._router.navigate(['obligaciones/ver', this.estacionId]);
         this.dialog.closeAll();
       }
     });
