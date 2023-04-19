@@ -4,6 +4,11 @@ import { Producto } from '../classes/producto.class';
 import { ProductoService } from '../services/producto.service';
 import { Observable, map, startWith, ReplaySubject } from 'rxjs'
 import { DataSource } from '@angular/cdk/collections';
+import { VentaService } from '../services/venta.service';
+import { MatDialog } from '@angular/material/dialog';
+import { MensajeEsperaDialogComponent } from '../dialogs/mensaje-espera-dialog/mensaje-espera-dialog.component';
+import { MensajePlanoDialogComponent } from '../dialogs/mensaje-plano-dialog/mensaje-plano-dialog.component';
+import { CurrencyPipe } from '@angular/common';
 
 @Component({
   selector: 'app-punto-venta',
@@ -30,8 +35,12 @@ export class PuntoVentaComponent implements OnInit {
     codigo_barras: ['']
   });
 
-  constructor(private _formBuilder: UntypedFormBuilder,
-    private _productoService: ProductoService) { }
+  constructor(
+    public dialog: MatDialog,
+    private currencyPipe: CurrencyPipe,
+    private _formBuilder: UntypedFormBuilder,
+    private _productoService: ProductoService,
+    private _ventaService: VentaService) { }
 
   ngOnInit(): void {
     this._productoService.getAll()
@@ -48,7 +57,6 @@ export class PuntoVentaComponent implements OnInit {
   }
 
   cambiarCantidad(i: number) {
-    console.log(this.productosSeleccionados);
     if (this.productosSeleccionados[i].cantidad < 1) {
       this.productosSeleccionados[i].cantidad = 1;
     }
@@ -134,6 +142,45 @@ export class PuntoVentaComponent implements OnInit {
   quitar(index: number) {
     this.productosSeleccionados.splice(index, 1);
     this.dataSource.setData(this.productosSeleccionados);
+  }
+
+  terminarCompra() {
+    this.dialog.open(MensajeEsperaDialogComponent, {
+      data: {
+        titulo: "Procesando",
+        contenido: "Procesando la compra"
+      },
+      disableClose: true
+    });
+    console.log(this.productosSeleccionados);
+    let venta = {
+      precio_total: this.getTotalCost()
+    };
+    this._ventaService.guardarVenta(venta)
+      .subscribe(id => {
+        console.log(id);
+        this.productosSeleccionados.forEach(producto => {
+          let ventaProducto = {
+            venta_fk: id,
+            producto_fk: producto.producto_id,
+            cantidad: producto.cantidad,
+            precio: producto.precio
+          };
+          this._ventaService.guardarVentaProducto(ventaProducto)
+          .subscribe(r => console.log(r));
+        });
+        this.dialog.closeAll();
+        this.dialog.open(MensajePlanoDialogComponent, {
+          data: {
+            titulo: "Compra terminada. Gracias :)",
+            contenido: "Su total a pagar es de: " + this.currencyPipe.transform(venta.precio_total) + ". Depositar en el botecito xfa"
+          }
+        })
+        .afterClosed()
+        .subscribe(() =>{
+          this.productosSeleccionados = [];
+        })
+      });
   }
 
   displayFn(producto: Producto): string {

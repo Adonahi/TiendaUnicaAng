@@ -16,6 +16,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatPaginatorModule } from '@angular/material/paginator'
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatCardModule } from '@angular/material/card';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -33,6 +34,8 @@ import { PuntoVentaComponent } from './punto-venta/punto-venta.component';
 import { MensajePlanoDialogComponent } from './dialogs/mensaje-plano-dialog/mensaje-plano-dialog.component';
 import { MensajeEsperaDialogComponent } from './dialogs/mensaje-espera-dialog/mensaje-espera-dialog.component';
 import { MensajeSiNoDialogComponent } from './dialogs/mensaje-si-no-dialog/mensaje-si-no-dialog.component';
+import { CurrencyPipe } from '@angular/common';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +48,8 @@ import { MensajeSiNoDialogComponent } from './dialogs/mensaje-si-no-dialog/mensa
     PuntoVentaComponent,
     MensajePlanoDialogComponent,
     MensajeEsperaDialogComponent,
-    MensajeSiNoDialogComponent
+    MensajeSiNoDialogComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -63,12 +67,15 @@ import { MensajeSiNoDialogComponent } from './dialogs/mensaje-si-no-dialog/mensa
     MatPaginatorModule,
     MatTooltipModule,
     MatAutocompleteModule,
+    MatCardModule,
     FlexLayoutModule,
     ReactiveFormsModule,
     HttpClientModule,
     FormsModule
   ],
-  providers: [],
+  providers: [
+    CurrencyPipe
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

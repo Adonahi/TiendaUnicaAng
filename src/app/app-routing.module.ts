@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { CompraVentaComponent } from './compra-venta/compra-venta.component';
 import { EstadisticasComponent } from './estadisticas/estadisticas.component';
 import { InicioComponent } from './inicio/inicio.component';
+import { LoginComponent } from './login/login.component';
 import { ProductosComponent } from './productos/productos.component';
 import { PuntoVentaComponent } from './punto-venta/punto-venta.component';
 
@@ -24,6 +25,9 @@ const routes: Routes = [
   },
   { path: 'ventas',
     component: CompraVentaComponent
+  },
+  { path: 'login',
+    component: LoginComponent
   }
 ];
 
