@@ -80,6 +80,6 @@
             <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true" class="example-first-header-row"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page of periodic elements" pageSize="10">
+        </mat-paginator>
     </div>
-    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page of periodic elements" pageSize="10">
-    </mat-paginator>

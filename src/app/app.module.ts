@@ -36,6 +36,7 @@ import { MensajeEsperaDialogComponent } from './dialogs/mensaje-espera-dialog/me
 import { MensajeSiNoDialogComponent } from './dialogs/mensaje-si-no-dialog/mensaje-si-no-dialog.component';
 import { CurrencyPipe } from '@angular/common';
 import { LoginComponent } from './login/login.component';
+import { TicketDialogComponent } from './dialogs/ticket-dialog/ticket-dialog.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { LoginComponent } from './login/login.component';
     MensajePlanoDialogComponent,
     MensajeEsperaDialogComponent,
     MensajeSiNoDialogComponent,
-    LoginComponent
+    LoginComponent,
+    TicketDialogComponent
   ],
   imports: [
     BrowserModule,

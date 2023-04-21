@@ -1,9 +1,11 @@
 import { Component, AfterViewInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { Producto } from '../classes/producto.class';
+import { TicketDialogComponent } from '../dialogs/ticket-dialog/ticket-dialog.component';
 import { AuthService } from '../services/auth.service';
 import { CompraService } from '../services/compra.service';
 import { VentaService } from '../services/venta.service';
@@ -34,6 +36,7 @@ export class CompraVentaComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   constructor(
+    public dialog: MatDialog,
     private _authService: AuthService,
     private _ventaService: VentaService,
     private _compraService: CompraService,
@@ -62,6 +65,12 @@ export class CompraVentaComponent implements AfterViewInit {
       this._ventaService.getVentaPorId(producto.venta_id);
     obs.subscribe((productos: any[]) =>{
       console.log(productos);
+      this.dialog.open(TicketDialogComponent, {
+        data: {
+          titulo: "Detalle en Ticket",
+          contenido: productos
+        }
+      })
     });
   }
 

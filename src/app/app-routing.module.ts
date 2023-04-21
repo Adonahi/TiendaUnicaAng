@@ -19,6 +19,13 @@ const routes: Routes = [
       role: ['0']
     }
   },
+  { path: 'punto_compra',
+    component: PuntoVentaComponent,
+    canActivate: [UsuarioGuard],
+    data: {
+      role: ['1']
+    }
+  },
   { path: 'productos',
     component: ProductosComponent,
     canActivate: [UsuarioGuard],

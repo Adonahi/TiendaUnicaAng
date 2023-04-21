@@ -1,7 +1,7 @@
 export const MENSAJES = [
     ':)',
     'Tas chistoso',
-    'tqm',
+    'tqm pero tqg',
     'Al menos lo estás intentando',
     'No es tu culpa ser miserable',
     'Mañana puede ser tu día, o no',
