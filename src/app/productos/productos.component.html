@@ -45,7 +45,7 @@
         <div class="loading-shade" *ngIf="isLoadingResults">
             <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
         </div>
-        <table mat-table [dataSource]="dataSource" class="example-table" matSort matSortDirection="desc" matSortDisableClear (matSortChange)="announceSortChange($event)">
+        <table mat-table [dataSource]="dataSource">
 
             <ng-container matColumnDef="nombre">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</th>

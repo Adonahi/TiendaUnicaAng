@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CompraVentaComponent } from './compra-venta/compra-venta.component';
 import { EstadisticasComponent } from './estadisticas/estadisticas.component';
+import { UsuarioGuard } from './guards/usuario.guard';
 import { InicioComponent } from './inicio/inicio.component';
 import { LoginComponent } from './login/login.component';
 import { ProductosComponent } from './productos/productos.component';
@@ -12,22 +13,43 @@ const routes: Routes = [
     component: InicioComponent
   },
   { path: 'punto_venta',
-    component: PuntoVentaComponent
+    component: PuntoVentaComponent,
+    canActivate: [UsuarioGuard],
+    data: {
+      role: ['0']
+    }
   },
   { path: 'productos',
-    component: ProductosComponent
+    component: ProductosComponent,
+    canActivate: [UsuarioGuard],
+    data: {
+      role: ['1']
+    }
   },
   { path: 'estadisticas',
-    component: EstadisticasComponent
+    component: EstadisticasComponent,
+    canActivate: [UsuarioGuard],
+    data: {
+      role: ['1']
+    }
   },
   { path: 'compras',
-    component: CompraVentaComponent
+    component: CompraVentaComponent,
+    canActivate: [UsuarioGuard],
+    data: {
+      role: ['1']
+    }
   },
   { path: 'ventas',
-    component: CompraVentaComponent
+    component: CompraVentaComponent,
+    canActivate: [UsuarioGuard],
+    data: {
+      role: ['1']
+    }
   },
   { path: 'login',
-    component: LoginComponent
+    component: LoginComponent,
+    canActivate: [UsuarioGuard]
   }
 ];
 

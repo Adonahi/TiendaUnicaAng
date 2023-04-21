@@ -11,6 +11,7 @@ import { Producto } from '../classes/producto.class';
 import { MensajeEsperaDialogComponent } from '../dialogs/mensaje-espera-dialog/mensaje-espera-dialog.component';
 import { MensajePlanoDialogComponent } from '../dialogs/mensaje-plano-dialog/mensaje-plano-dialog.component';
 import { MensajeSiNoDialogComponent } from '../dialogs/mensaje-si-no-dialog/mensaje-si-no-dialog.component';
+import { AuthService } from '../services/auth.service';
 import { ProductoService } from '../services/producto.service';
 
 @Component({
@@ -52,6 +53,7 @@ export class ProductosComponent implements AfterViewInit {
     private _liveAnnouncer: LiveAnnouncer,
     private _formBuilder: UntypedFormBuilder,
     private _router: Router,
+    private _authService: AuthService,
     private _productoService: ProductoService
   ) {
 
@@ -60,7 +62,7 @@ export class ProductosComponent implements AfterViewInit {
   ngAfterViewInit(): void {
     this.productoForm.patchValue({ producto_id: null, nombre: null, codigo_barras: null, precio_compra: null, precio_venta: null });
 
-    this._productoService.getAll()
+    this._productoService.getPorUsuario(this._authService.usuario.usuario_id)
       .subscribe((productos: Producto[]) => {
         this.isLoadingResults = true;
         this.dataSource.data = productos;
@@ -121,7 +123,7 @@ export class ProductosComponent implements AfterViewInit {
           this.productoForm.value['codigo_barras'],
           this.productoForm.value['precio_compra'],
           this.productoForm.value['precio_venta'],
-          4,
+          this._authService.usuario.usuario_id,
           0
         )) :
         this._productoService.insertar(new Producto(
@@ -130,7 +132,7 @@ export class ProductosComponent implements AfterViewInit {
           this.productoForm.value['codigo_barras'],
           this.productoForm.value['precio_compra'],
           this.productoForm.value['precio_venta'],
-          4,
+          this._authService.usuario.usuario_id,
           0
         ));
 

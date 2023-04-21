@@ -47,6 +47,11 @@ export class ProductoService {
     .pipe(catchError(this.handleError<Producto>()));
   }
 
+  getPorUsuario(usuario_id: number): Observable<Producto[]>{
+    const url = `${URL}${PRODUCTO}/getPorUsuario/${usuario_id}`;
+    return this.http.get<Producto[]>(url, OPTIONS);
+  }
+
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       if (error.error.error === 400) {

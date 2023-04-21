@@ -1,37 +1,37 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of, catchError } from 'rxjs'
-import { OPTIONS, URL, VENTA, VENTAPRODUCTO } from './config';
+import { Observable, of, catchError } from 'rxjs';
+import { COMPRA, COMPRAPRODUCTO, OPTIONS, URL } from './config';
 
 @Injectable({
   providedIn: 'root'
 })
-export class VentaService {
+export class CompraService {
 
   constructor(private http: HttpClient) { }
 
-  guardarVenta(venta: any): Observable<any>{
-    const url = `${URL}${VENTA}`;
+  guardarCompra(venta: any): Observable<any>{
+    const url = `${URL}${COMPRA}`;
     return this.http
     .post<any>(url, venta, OPTIONS)
     .pipe(catchError(this.handleError<any>()));
   }
 
 
-  guardarVentaProducto(ventaProducto: any): Observable<any> {
-    const url = `${URL}${VENTAPRODUCTO}`;
+  guardarCompraProducto(ventaProducto: any): Observable<any> {
+    const url = `${URL}${COMPRAPRODUCTO}`;
     return this.http
     .post<any>(url, ventaProducto, OPTIONS)
     .pipe(catchError(this.handleError<any>()));
   }
 
-  getVentaProductoPorUsuario(usuario_id: number): Observable<any[]>{
-    const url = `${URL}${VENTAPRODUCTO}/getPorUsuario/${usuario_id}`;
+  getCompraProductoPorUsuario(usuario_id: number): Observable<any[]>{
+    const url = `${URL}${COMPRAPRODUCTO}/getPorUsuario/${usuario_id}`;
     return this.http.get<any[]>(url, OPTIONS);
   }
 
-  getVentaPorId(id: number): Observable<any[]>{
-    const url = `${URL}${VENTA}/${id}`;
+  getCompraPorId(id: number): Observable<any[]>{
+    const url = `${URL}${COMPRA}/${id}`;
     return this.http.get<any[]>(url, OPTIONS);
   }
 
@@ -44,4 +44,5 @@ export class VentaService {
       }
     };
   }
+
 }

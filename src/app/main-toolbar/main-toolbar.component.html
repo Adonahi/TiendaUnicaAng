@@ -2,24 +2,29 @@
     <button mat-button routerLink="">
         <span>Abarrotes 🍩</span>
     </button>
-    <button mat-button routerLink="punto_venta" routerLinkActive="active">
+    <button *ngIf="role == 0 " mat-button routerLink="punto_venta" routerLinkActive="active">
         Punto de Venta
     </button>
-    <button mat-button routerLink="productos" routerLinkActive="active">
+    <button *ngIf="role == 1" mat-button routerLink="productos" routerLinkActive="active">
         Productos
     </button>
-    <button mat-button routerLink="estadisticas" routerLinkActive="active">
+    <button *ngIf="role == 1" mat-button routerLink="estadisticas" routerLinkActive="active">
         Estadísticas
     </button>
-    <button mat-button routerLink="compras" routerLinkActive="active">
+    <button *ngIf="role == 1" mat-button routerLink="compras" routerLinkActive="active">
         Compras
     </button>
-    <button mat-button routerLink="ventas" routerLinkActive="active">
+    <button *ngIf="role == 1" mat-button routerLink="ventas" routerLinkActive="active">
         Ventas
     </button>
     <span style="flex: 1 1 auto"></span>
     <button mat-icon-button (click)="lanzarSnackBar()">
         <mat-icon>favorite</mat-icon>
+    </button>
+    <span>{{ nombreUsuario }}</span>
+    &nbsp;
+    <button *ngIf="role == 1" mat-mini-fab color="warn" matTooltip="Cerrar Sesión" (click)="logout()">
+        <mat-icon>exit_to_app</mat-icon>
     </button>
 </mat-toolbar>
 <mat-toolbar class="shadow-mb mat-elevation-z8" color="primary" fxShow="true" fxHide.gt-sm="true">
@@ -31,21 +36,26 @@
         <button mat-icon-button (click)="lanzarSnackBar()">
             <mat-icon>favorite</mat-icon>
         </button>
+        <span class="btn-text">{{ nombreUsuario }}</span>
+        &nbsp;
+        <button *ngIf="role == 1" mat-mini-fab color="warn" matTooltip="Cerrar Sesión" (click)="logout()">
+            <mat-icon>exit_to_app</mat-icon>
+        </button>
     </mat-toolbar-row>
     <mat-toolbar-row>
-        <!--button mat-button routerLink="punto_venta" routerLinkActive="active">
+        <button *ngIf="role == 0" mat-button routerLink="punto_venta" routerLinkActive="active">
             Punto de Venta
-        </button-->
-        <button mat-button routerLink="productos" routerLinkActive="active" class="col btn-text">
+        </button>
+        <button *ngIf="role == 1" mat-button routerLink="productos" routerLinkActive="active" class="col btn-text">
             Productos
         </button>
-        <button mat-button routerLink="estadisticas" routerLinkActive="active" class="col btn-text">
+        <button *ngIf="role == 1" mat-button routerLink="estadisticas" routerLinkActive="active" class="col btn-text">
             Estadísticas
         </button>
-        <button mat-button routerLink="compras" routerLinkActive="active" class="col btn-text">
+        <button *ngIf="role == 1" mat-button routerLink="compras" routerLinkActive="active" class="col btn-text">
             Compras
         </button>
-        <button mat-button routerLink="ventas" routerLinkActive="active" class="col btn-text">
+        <button *ngIf="role == 1" mat-button routerLink="ventas" routerLinkActive="active" class="col btn-text">
             Ventas
         </button>
     </mat-toolbar-row>
