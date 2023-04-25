@@ -17,6 +17,8 @@ import { MatPaginatorModule } from '@angular/material/paginator'
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatCardModule } from '@angular/material/card';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -34,7 +36,7 @@ import { PuntoVentaComponent } from './punto-venta/punto-venta.component';
 import { MensajePlanoDialogComponent } from './dialogs/mensaje-plano-dialog/mensaje-plano-dialog.component';
 import { MensajeEsperaDialogComponent } from './dialogs/mensaje-espera-dialog/mensaje-espera-dialog.component';
 import { MensajeSiNoDialogComponent } from './dialogs/mensaje-si-no-dialog/mensaje-si-no-dialog.component';
-import { CurrencyPipe } from '@angular/common';
+import { CurrencyPipe, DatePipe } from '@angular/common';
 import { LoginComponent } from './login/login.component';
 import { TicketDialogComponent } from './dialogs/ticket-dialog/ticket-dialog.component';
 
@@ -70,13 +72,16 @@ import { TicketDialogComponent } from './dialogs/ticket-dialog/ticket-dialog.com
     MatTooltipModule,
     MatAutocompleteModule,
     MatCardModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     FlexLayoutModule,
     ReactiveFormsModule,
     HttpClientModule,
     FormsModule
   ],
   providers: [
-    CurrencyPipe
+    CurrencyPipe,
+    DatePipe
   ],
   bootstrap: [AppComponent]
 })

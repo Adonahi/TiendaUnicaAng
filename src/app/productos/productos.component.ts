@@ -26,6 +26,7 @@ export class ProductosComponent implements AfterViewInit {
 
   //Pa la tabla
   displayedColumns: string[] = [
+    'existencia',
     'nombre',
     'precio_compra',
     'precio_venta',

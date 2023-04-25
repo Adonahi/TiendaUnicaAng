@@ -79,6 +79,7 @@ export class PuntoVentaComponent implements OnInit {
 
   buscarPorCodigo() {
     let productoVenta = {
+      existencia: 0,
       nombre: '',
       precio_venta: 0,
       precio_compra: 0,
@@ -88,6 +89,7 @@ export class PuntoVentaComponent implements OnInit {
     };
     this.productos.every(producto => {
       if (producto.codigo_barras == this.ventaForm.value['codigo_barras']) {
+        productoVenta.existencia = Number(producto.existencia);
         productoVenta.nombre = producto.nombre;
         productoVenta.precio_venta = Number(producto.precio_venta);
         productoVenta.precio_compra = Number(producto.precio_compra);
@@ -98,7 +100,7 @@ export class PuntoVentaComponent implements OnInit {
       }
       return true;
     });
-    if (productoVenta.cantidad == 0) {
+    if (productoVenta.producto_id == 0) {
       this.error = true;
     }
     else {
@@ -123,38 +125,40 @@ export class PuntoVentaComponent implements OnInit {
       this.dataSource.setData(this.productosSeleccionados);
     }
     this.ventaForm.patchValue({ nombre_producto: '', codigo_barras: '' });
+    console.log(this.productosSeleccionados);
   }
 
   seleccionar(producto: Producto) {
     this.ventaForm.patchValue({ nombre_producto: '', codigo_barras: '' });
-    console.log(producto);
-    let productoVenta = {
-      nombre: producto.nombre,
-      precio_venta: Number(producto.precio_venta),
-      precio_compra: Number(producto.precio_compra),
-      producto_id: Number(producto.producto_id),
-      cantidad: 1,
-      precio: Number(this.compra ? producto.precio_compra : producto.precio_venta)
-    };
-    let ban = false;
-    if (this.productosSeleccionados.length > 0) {
-      for (let index = 0; index < this.productosSeleccionados.length; index++) {
-        if (productoVenta.producto_id == this.productosSeleccionados[index].producto_id) {
-          this.productosSeleccionados[index].cantidad++;
-          this.productosSeleccionados[index].precio = this.compra ?
-            this.productosSeleccionados[index].precio_compra * this.productosSeleccionados[index].cantidad :
-            this.productosSeleccionados[index].precio_venta * this.productosSeleccionados[index].cantidad;
-          ban = true;
-          break;
+      console.log(producto);
+      let productoVenta = {
+        existencia: Number(producto.existencia),
+        nombre: producto.nombre,
+        precio_venta: Number(producto.precio_venta),
+        precio_compra: Number(producto.precio_compra),
+        producto_id: Number(producto.producto_id),
+        cantidad: 1,
+        precio: Number(this.compra ? producto.precio_compra : producto.precio_venta)
+      };
+      let ban = false;
+      if (this.productosSeleccionados.length > 0) {
+        for (let index = 0; index < this.productosSeleccionados.length; index++) {
+          if (productoVenta.producto_id == this.productosSeleccionados[index].producto_id) {
+            this.productosSeleccionados[index].cantidad++;
+            this.productosSeleccionados[index].precio = this.compra ?
+              this.productosSeleccionados[index].precio_compra * this.productosSeleccionados[index].cantidad :
+              this.productosSeleccionados[index].precio_venta * this.productosSeleccionados[index].cantidad;
+            ban = true;
+            break;
+          }
         }
+        if (!ban) this.productosSeleccionados.push(productoVenta);
       }
-      if (!ban) this.productosSeleccionados.push(productoVenta);
-    }
-    else {
-      this.productosSeleccionados.push(productoVenta);
-    }
-    console.log(this.productosSeleccionados);
-    this.dataSource.setData(this.productosSeleccionados);
+      else {
+        this.productosSeleccionados.push(productoVenta);
+      }
+      console.log(this.productosSeleccionados);
+      this.dataSource.setData(this.productosSeleccionados);
   }
 
   getTotalCost() {
@@ -188,6 +192,7 @@ export class PuntoVentaComponent implements OnInit {
         let ventaProducto = {
           venta_fk: id,
           compra_fk: id,
+          existencia: producto.existencia,
           producto_fk: producto.producto_id,
           cantidad: producto.cantidad,
           precio: producto.precio

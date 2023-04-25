@@ -47,9 +47,14 @@
         </div>
         <table mat-table [dataSource]="dataSource">
 
+            <ng-container matColumnDef="existencia">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>En Existencia</th>
+                <td mat-cell *matCellDef="let row">{{ row.existencia }}</td> 
+            </ng-container>
+
             <ng-container matColumnDef="nombre">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</th>
-                <td mat-cell *matCellDef="let row">{{row.nombre.charAt(0).toUpperCase() + row.nombre.slice(1)}}</td> 
+                <td mat-cell *matCellDef="let row">{{ row.nombre.charAt(0).toUpperCase() + row.nombre.slice(1) }}</td> 
             </ng-container>
     
             <ng-container matColumnDef="precio_compra">

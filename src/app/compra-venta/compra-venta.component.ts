@@ -1,4 +1,6 @@
+import { DatePipe } from '@angular/common';
 import { Component, AfterViewInit, ViewChild } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -18,7 +20,8 @@ export class CompraVentaComponent implements AfterViewInit {
 
   titulo = "";
 
-  productos: any[] = [];
+  productos: any[] = []; 
+  productosFiltrados: any[] = [];
 
   //Pa la tabla
   displayedColumns: string[] = [
@@ -33,6 +36,11 @@ export class CompraVentaComponent implements AfterViewInit {
   isLoadingResults: boolean = false;
   dataSource = new MatTableDataSource();
 
+  range = new FormGroup({
+    start: new FormControl<Date | null>(null),
+    end: new FormControl<Date | null>(null),
+  });
+
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   constructor(
@@ -40,9 +48,17 @@ export class CompraVentaComponent implements AfterViewInit {
     private _authService: AuthService,
     private _ventaService: VentaService,
     private _compraService: CompraService,
-    private _router: Router
+    private _router: Router,
+    private datePipe: DatePipe
   ) {
     this.titulo = this._router.url == '/compras' ? "Compras" : "Ventas";
+    
+    this.range.valueChanges.subscribe(() => {
+      this.dataSource.data = this.productos;
+      if (this.range.value.start && this.range.value.end) {
+        this.filtrar(this.datePipe.transform(this.range.value.start, 'yyyy-MM-dd'), this.datePipe.transform(this.range.value.end, 'yyyy-MM-dd'))
+      }
+    });
   }
 
   ngAfterViewInit(): void {
@@ -50,6 +66,7 @@ export class CompraVentaComponent implements AfterViewInit {
       this._compraService.getCompraProductoPorUsuario(this._authService.usuario.usuario_id) :
       this._ventaService.getVentaProductoPorUsuario(this._authService.usuario.usuario_id);
     obs.subscribe((productos: any[]) => {
+      this.productosFiltrados = this.productos = productos;
       this.isLoadingResults = true;
       this.dataSource.data = productos;
       this.dataSource.paginator = this.paginator;
@@ -72,6 +89,19 @@ export class CompraVentaComponent implements AfterViewInit {
         }
       })
     });
+  }
+
+  filtrar(fechaInicio: any, fechaFin: any){
+    this.productosFiltrados = [];
+    let milisecInicio = new Date(fechaInicio);
+    let milisecFin = new Date(fechaFin);
+    this.productos.forEach(producto =>{
+      let milisecProducto = new Date(producto.fecha.split(" ")[0]);
+      if(milisecProducto.getTime() >= milisecInicio.getTime() && milisecProducto.getTime() <= milisecFin.getTime()){
+        this.productosFiltrados.push(producto);
+      }
+    });
+    this.dataSource.data = this.productosFiltrados;
   }
 
 }
