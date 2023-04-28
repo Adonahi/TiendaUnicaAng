@@ -57,6 +57,10 @@ const routes: Routes = [
   { path: 'login',
     component: LoginComponent,
     canActivate: [UsuarioGuard]
+  },
+  {
+    path: '**',
+    component: InicioComponent
   }
 ];
 

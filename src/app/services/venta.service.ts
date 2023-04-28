@@ -35,6 +35,11 @@ export class VentaService {
     return this.http.get<any[]>(url, OPTIONS);
   }
 
+  getPorUsuarioPorProducto(usuario_id: number): Observable<any[]>{
+    const url = `${URL}${VENTAPRODUCTO}/getPorUsuarioPorProducto/${usuario_id}`;
+    return this.http.get<any[]>(url, OPTIONS);
+  }
+
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       if (error.error.error === 400) {

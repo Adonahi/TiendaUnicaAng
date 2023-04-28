@@ -20,6 +20,9 @@ import { MatCardModule } from '@angular/material/card';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 
+//Terceros
+import { NgxEchartsModule } from 'ngx-echarts';
+
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -77,7 +80,10 @@ import { TicketDialogComponent } from './dialogs/ticket-dialog/ticket-dialog.com
     FlexLayoutModule,
     ReactiveFormsModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    NgxEchartsModule.forRoot({
+      echarts: () => import('echarts')
+    })
   ],
   providers: [
     CurrencyPipe,
