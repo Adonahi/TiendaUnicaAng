@@ -12,7 +12,8 @@ export class LoginComponent implements OnInit{
 
   cargando = false;
   loginForm: FormGroup;
-  
+  mensaje = '';
+  error = false;
 
   constructor(
     private _formBuilder: FormBuilder,
@@ -28,19 +29,21 @@ export class LoginComponent implements OnInit{
   }
 
   iniciarSesion(){
+    this.error = false;
     if(this.loginForm.valid){
       this.cargando = true;
       this._authService.loginUser(this.loginForm.controls['email'].value, this.loginForm.controls['password'].value)
       .subscribe( data =>{
-        console.log(data);
             if (data.status !== 400) {
-              console.log(data);
               if (this._authService.isAuthenticated()) {
                 this._router.navigate(['']).then(() => window.location.reload());
               }
             }
             else {
+              this.cargando = false;
               console.log(data.messages.error);
+              this.mensaje = data.messages.error;
+              this.error = true;
             }
       });
     }

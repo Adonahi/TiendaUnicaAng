@@ -35,7 +35,6 @@ export class AuthService {
         map(response => {
           localStorage.setItem('loggedInUser', JSON.stringify(response));
           this.loggedUserSubject.next(response);
-          console.log(response);
           return response;
         }),
         catchError(this.handleError<any>())
@@ -49,7 +48,6 @@ export class AuthService {
         map(response => {
           localStorage.removeItem('loggedInUser');
           this.loggedUserSubject.next(null);
-          console.log(response);
           return response;
         }),
         catchError(this.handleError<any>())

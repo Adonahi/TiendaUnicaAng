@@ -138,13 +138,18 @@ export class ProductosComponent implements AfterViewInit {
         ));
 
       obs.subscribe((r: any) => {
+        console.log(r);
         this.dialog.closeAll();
-        if (r.error) {
+        if (r.error || r.message) {
           var mensaje = "";
-          for (var i in r.messages) {
-            mensaje += i + ": " + r.messages[i] + "\n";
+          if(r.error){
+            for (var i in r.messages) {
+              mensaje += i + ": " + r.messages[i] + "\n";
+            }
           }
-          console.log("rrorrrrrr");
+          else if(r.message){
+            mensaje = r.message
+          }
           this.dialog.open(MensajePlanoDialogComponent, {
             data: {
               titulo: "Error",

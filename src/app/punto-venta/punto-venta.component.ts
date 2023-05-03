@@ -125,12 +125,10 @@ export class PuntoVentaComponent implements OnInit {
       this.dataSource.setData(this.productosSeleccionados);
     }
     this.ventaForm.patchValue({ nombre_producto: '', codigo_barras: '' });
-    console.log(this.productosSeleccionados);
   }
 
   seleccionar(producto: Producto) {
     this.ventaForm.patchValue({ nombre_producto: '', codigo_barras: '' });
-      console.log(producto);
       let productoVenta = {
         existencia: Number(producto.existencia),
         nombre: producto.nombre,
@@ -157,7 +155,6 @@ export class PuntoVentaComponent implements OnInit {
       else {
         this.productosSeleccionados.push(productoVenta);
       }
-      console.log(this.productosSeleccionados);
       this.dataSource.setData(this.productosSeleccionados);
   }
 
@@ -178,7 +175,6 @@ export class PuntoVentaComponent implements OnInit {
       },
       disableClose: true
     });
-    console.log(this.productosSeleccionados);
     let venta = {
       precio_total: this.getTotalCost()
     };
@@ -187,7 +183,6 @@ export class PuntoVentaComponent implements OnInit {
       this._ventaService.guardarVenta(venta);
 
     obs.subscribe(id => {
-      console.log(id);
       this.productosSeleccionados.forEach(producto => {
         let ventaProducto = {
           venta_fk: id,

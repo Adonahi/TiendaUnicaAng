@@ -54,11 +54,8 @@ export class ProductoService {
 
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
-      if (error.error.error === 400) {
-        return of(error.error);
-      } else {
-        return of(error.error);
-      }
+      console.log(error);
+      return of(error.error);
     };
   }
 

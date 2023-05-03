@@ -1,6 +1,7 @@
 import { HttpHeaders} from "@angular/common/http";
 
 export const URL = 'http://localhost:8080/';
+//export const URL = 'https://adonahistore.com/index.php/';
 
 export const LOGIN = 'login';
 export const LOGOUT = 'logout';

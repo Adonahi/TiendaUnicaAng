@@ -24,7 +24,6 @@ export class MainToolbarComponent implements OnInit{
   ngOnInit(): void {
     this.role = typeof this.authService.usuario == 'undefined' ? 0 : this.authService.usuario.permiso;
     this.nombreUsuario = typeof this.authService.usuario == 'undefined' ? '' : this.authService.usuario.nombre;
-    console.log(this.role, this.nombreUsuario);
   }
 
   lanzarSnackBar(){

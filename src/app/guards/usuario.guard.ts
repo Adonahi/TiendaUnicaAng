@@ -32,7 +32,6 @@ export class UsuarioGuard implements CanActivate {
 
     if (route.url[0]?.path === 'login' && this.authService.isAuthenticated()) {
       this.router.navigate(['']);
-      console.log(route.url[0].path)
       return false;
     }
 

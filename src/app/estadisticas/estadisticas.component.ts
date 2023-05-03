@@ -41,8 +41,6 @@ export class EstadisticasComponent implements OnInit {
       this._compraService.getCompraProductoPorUsuario(this._authService.usuario.usuario_id)
     ])
       .subscribe(([productosVenta, productosCompra]) => {
-        console.log(productosVenta);
-        console.log(productosCompra);
         this.ventas = this.ventasFiltro = productosVenta;
         this.compras = this.comprasFiltro = productosCompra;
 
@@ -84,7 +82,6 @@ export class EstadisticasComponent implements OnInit {
         this.gananciasSemana[fecha.getDay() - 1 < 0 ? 6 : fecha.getDay() - 1] += ((Number(venta.precio_venta) * Number(venta.cantidad)) - (Number(venta.precio_compra) * Number(venta.cantidad)));
       }
     });
-    console.log(this.ventasSemana);
     this.ventasGananciasChartOptions = {
       title: {
         text: 'Relación de ventas con ganancias',
@@ -144,7 +141,6 @@ export class EstadisticasComponent implements OnInit {
       ]
     }
     this.todayGanancias = new Date(todayTemp);
-    console.log(this.getTotal(this.ventasSemana));
   }
 
   ventasPorProductoChart(semana: number){
@@ -161,8 +157,6 @@ export class EstadisticasComponent implements OnInit {
 
     firstDay.setHours(0, 0, 0, 0);
     lastDay.setHours(23, 59, 59, 999);
-
-    this.ventasSemana = [0, 0, 0, 0, 0, 0, 0];
 
     let ventaPorProducto: number[] = [];
     let ventaPorProductoObj: any[] = [];
@@ -224,7 +218,6 @@ export class EstadisticasComponent implements OnInit {
   }
 
   ventasVsComprasChart(semana: number){
-    //console.log(this.getTotalPrecio(this.ventas), this.getTotalPrecio(this.compras));
     let todayTemp = new Date(this.todayVentasVsCompras);
     if(semana != 0){
       this.todayVentasVsCompras = new Date(semana == 7 ? this.todayVentasVsCompras.getTime() + 604800000 : this.todayVentasVsCompras.getTime() - 604800000);

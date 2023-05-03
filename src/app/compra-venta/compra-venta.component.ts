@@ -76,12 +76,10 @@ export class CompraVentaComponent implements AfterViewInit {
   }
 
   verTicket(producto: any) {
-    console.log(producto);
     let obs = this._router.url == '/compras' ?
       this._compraService.getCompraPorId(producto.compra_id) :
       this._ventaService.getVentaPorId(producto.venta_id);
     obs.subscribe((productos: any[]) =>{
-      console.log(productos);
       this.dialog.open(TicketDialogComponent, {
         data: {
           titulo: "Detalle en Ticket",
