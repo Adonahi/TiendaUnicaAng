@@ -18,6 +18,9 @@
         Ventas
     </button>
     <span style="flex: 1 1 auto"></span>
+    <button *ngIf="role == 0 " mat-button routerLink="login">
+        Login
+    </button>
     <button mat-icon-button (click)="lanzarSnackBar()">
         <mat-icon>favorite</mat-icon>
     </button>
@@ -33,6 +36,9 @@
             <span>Abarrotes 🍩</span>
         </button>
         <span style="flex: 1 1 auto"></span>
+        <button *ngIf="role == 0 " mat-button routerLink="login">
+            Login
+        </button>
         <button mat-icon-button (click)="lanzarSnackBar()">
             <mat-icon>favorite</mat-icon>
         </button>

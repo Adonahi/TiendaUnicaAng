@@ -77,6 +77,11 @@ export class ProductosComponent implements AfterViewInit {
   editar(producto: Producto) {
     this.edit = true;
     this.productoForm.patchValue({ producto_id: producto.producto_id, nombre: producto.nombre.charAt(0).toUpperCase() + producto.nombre.slice(1), codigo_barras: producto.codigo_barras, precio_compra: producto.precio_compra, precio_venta: producto.precio_venta });
+    window.scroll({ 
+      top: 0, 
+      left: 0, 
+      behavior: 'smooth' 
+    });
   }
 
   eliminar(producto: Producto) {

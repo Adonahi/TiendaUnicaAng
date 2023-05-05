@@ -1,14 +1,208 @@
-<mat-card style="margin: 5% 20%;">
+<mat-card style="margin: 2% 20%; height: 35vh;">
     <mat-card-header>
-        <mat-card-title>Inicio</mat-card-title>
+        <mat-card-title>Productos</mat-card-title>
     </mat-card-header>
-    <mat-card-content style="margin: 2%;">
-        <h3>Hola :) bienvenids a tods.</h3>
-        <h3>El propósito del sistema es llevar un mejor control de lo que se está vendiendo en la sala, así que de favor registrar todo lo que estén comprando,
-            aquí también están los precios y puedes escanear el código de barras, sólo vayan a <b>Punto de Venta</b> 
-            Si alguien desea vender algo y usar el sistema para administrarlo lo puede hacer, sólo de avisar al administrador para crear un nuevo usuario.
-        </h3>
-        <h3>Igual si quieren usar este espacio para algún anuncio se puede hacer. Grax por comprar <3</h3>
+    <mat-card-content>
+        <div id="carouselExample" class="carousel slide" data-bs-theme="dark" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active" style="padding: 2% 10%;">
+                    <div class="row">
+                        <div class="col">
+                            <mat-card routerLink="punto_venta" style="cursor: pointer;">
+                                <mat-card-header>
+                                    <mat-card-title>Papitas Varias</mat-card-title>
+                                    <mat-card-subtitle>$10.00</mat-card-subtitle>
+                                </mat-card-header>
+                                <mat-card-content>
+                                    <img src="https://m.media-amazon.com/images/I/41ABHsynlHL._AC_.jpg"
+                                        style="max-width: 35%; height: auto;">
+                                    <img src="https://m.media-amazon.com/images/I/61SqIF4NgSL._AC_SY445_.jpg"
+                                        style="max-width: 35%; height: auto;">
+                                </mat-card-content>
+                            </mat-card>
+                        </div>
+                        <div class="col">
+                            <mat-card routerLink="punto_venta" style="cursor: pointer;">
+                                <mat-card-header>
+                                    <mat-card-title>Top-Top's</mat-card-title>
+                                    <mat-card-subtitle>$8.00</mat-card-subtitle>
+                                </mat-card-header>
+                                <mat-card-content>
+                                    <img src="https://res.cloudinary.com/walmart-labs/image/upload/d_default.jpg/w_960,dpr_auto,f_auto,q_auto:best/gr/images/product-images/img_large/00750036600182L.jpg"
+                                        style="max-width: 49%; height: auto;">
+                                </mat-card-content>
+                            </mat-card>
+                        </div>
+                        <div class="col">
+                            <mat-card routerLink="punto_venta" style="cursor: pointer;">
+                                <mat-card-header>
+                                    <mat-card-title>Coca-Cola</mat-card-title>
+                                    <mat-card-subtitle>$16.00</mat-card-subtitle>
+                                </mat-card-header>
+                                <mat-card-content>
+                                    <img src="https://http2.mlstatic.com/D_NQ_NP_687893-MLM49902774775_052022-O.jpg"
+                                        style="max-width: 23%; height: auto;">
+                                </mat-card-content>
+                            </mat-card>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item" style="padding: 2% 10%;">
+                    <div class="row">
+                        <div class="col">
+                            <mat-card routerLink="punto_venta" style="cursor: pointer;">
+                                <mat-card-header>
+                                    <mat-card-title>Paletas</mat-card-title>
+                                    <mat-card-subtitle>$3.00</mat-card-subtitle>
+                                </mat-card-header>
+                                <mat-card-content>
+                                    <img src="https://m.media-amazon.com/images/I/61vELq5GJWL.jpg"
+                                        style="max-width: 35%; height: auto;">
+                                    <img src="https://cdn.shopify.com/s/files/1/0568/6473/5311/products/pletatarrito2.png?v=1676499715"
+                                        style="max-width: 35%; height: auto;">
+                                    <img src="https://cdn.shopify.com/s/files/1/0520/3152/0924/products/IMG_2772-PhotoRoom-151_1024x1024.png?v=1673091887"
+                                        style="max-width: 28%; height: auto;">
+                                </mat-card-content>
+                            </mat-card>
+                        </div>
+                        <div class="col">
+                            <mat-card routerLink="punto_venta" style="cursor: pointer;">
+                                <mat-card-header>
+                                    <mat-card-title>Winis</mat-card-title>
+                                    <mat-card-subtitle>$5.00</mat-card-subtitle>
+                                </mat-card-header>
+                                <mat-card-content>
+                                    <img src="https://surtitienda.vteximg.com.br/arquivos/ids/166114-2000-2000/00754177505829.1.jpg?v=636862235871400000"
+                                        style="max-width: 25%; height: auto;">
+                                    <img src="https://onixsuper.com/wp-content/uploads/2020/10/754177303005.jpg"
+                                        style="max-width: 25%; height: auto;">
+                                    <img src="https://cdn.shopify.com/s/files/1/0535/4681/1584/products/winis_naranja_1024x1024@2x.jpg?v=1613690989"
+                                        style="max-width: 25%; height: auto;">
+                                    <img src="https://onixsuper.com/wp-content/uploads/2020/10/754177505812.jpg"
+                                        style="max-width: 25%; height: auto;">
+                                </mat-card-content>
+                            </mat-card>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item" style="padding: 2% 10%;">
+                    <div class="row">
+                        <div class="col">
+                            <mat-card routerLink="punto_venta" style="cursor: pointer;">
+                                <mat-card-header>
+                                    <mat-card-title>Palomitas</mat-card-title>
+                                    <mat-card-subtitle>$15.00</mat-card-subtitle>
+                                </mat-card-header>
+                                <mat-card-content>
+                                    <img src="https://m.media-amazon.com/images/I/51XzHmwsN2L._AC_UY218_.jpg"
+                                        style="max-width: 50%; height: auto;">
+                                </mat-card-content>
+                            </mat-card>
+                        </div>
+                        <div class="col">
+                            <mat-card routerLink="punto_venta" style="cursor: pointer;">
+                                <mat-card-header>
+                                    <mat-card-title>Boing</mat-card-title>
+                                    <mat-card-subtitle>$6.00</mat-card-subtitle>
+                                </mat-card-header>
+                                <mat-card-content>
+                                    <img src="https://res.cloudinary.com/walmart-labs/image/upload/h_500,w_500,q_auto:best/v1591796520/gr/images/product-images/img_large/00000007500179L.jpg"
+                                        style="max-width: 33%; height: auto;">
+                                    <img src="https://res.cloudinary.com/walmart-labs/image/upload/h_500,w_500,q_auto:best/v1591796520/gr/images/product-images/img_large/00000007500175L.jpg"
+                                        style="max-width: 33%; height: auto;">
+                                    <img src="https://res.cloudinary.com/walmart-labs/image/upload/h_500,w_500,q_auto:best/v1591796520/gr/images/product-images/img_large/00000007500177L.jpg"
+                                        style="max-width: 33%; height: auto;">
+                                </mat-card-content>
+                            </mat-card>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item" style="padding: 2% 10%;">
+                    <div class="row">
+                        <div class="col">
+                            <mat-card routerLink="punto_venta" style="cursor: pointer;">
+                                <mat-card-header>
+                                    <mat-card-title>Bubulubus Congelados</mat-card-title>
+                                    <mat-card-subtitle>$4.00</mat-card-subtitle>
+                                </mat-card-header>
+                                <mat-card-content>
+                                    <img src="https://http2.mlstatic.com/D_NQ_NP_831912-MLM53445531095_012023-O.jpg"
+                                        style="max-width: 60%; height: auto;">
+                                </mat-card-content>
+                            </mat-card>
+                        </div>
+                        <div class="col">
+                            <mat-card routerLink="punto_venta" style="cursor: pointer;">
+                                <mat-card-header>
+                                    <mat-card-title>Kinder Delice</mat-card-title>
+                                    <mat-card-subtitle>$15.00</mat-card-subtitle>
+                                </mat-card-header>
+                                <mat-card-content>
+                                    <img src="https://cdn.shopify.com/s/files/1/0356/1088/6280/products/WhatsAppImage2020-06-19at13.22.31_530x@2x.jpg?v=1592591053"
+                                        style="max-width: 65%; height: auto;">
+                                </mat-card-content>
+                            </mat-card>
+                        </div>
+                        <div class="col">
+                            <mat-card routerLink="punto_venta" style="cursor: pointer;">
+                                <mat-card-header>
+                                    <mat-card-title>Milky Way, Snickers y M&M's</mat-card-title>
+                                    <mat-card-subtitle>$16.00</mat-card-subtitle>
+                                </mat-card-header>
+                                <mat-card-content>
+                                    <img src="https://static.wixstatic.com/media/cb2adb_2fcac0e28da44492826b4e028579ea23~mv2.png/v1/fit/w_500,h_500,q_90/file.png"
+                                        style="max-width: 30%; height: auto;">
+                                    <img src="https://cdn.shopify.com/s/files/1/0636/2519/9866/products/127952-01_snickers-candy-bars-48-piece-box.jpg?v=1674629172"
+                                        style="max-width: 30%; height: auto;">
+                                    <img src="https://http2.mlstatic.com/D_NQ_NP_844225-MLM49743549541_042022-O.jpg"
+                                        style="max-width: 30%; height: auto;">
+                                </mat-card-content>
+                            </mat-card>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
     </mat-card-content>
 </mat-card>
 
+<div class="row">
+    <div class="col">
+        <mat-card style="margin: 0% 20%;">
+            <mat-card-header>
+                <mat-card-title>Inicio</mat-card-title>
+            </mat-card-header>
+            <mat-card-content style="margin: 2%;">
+                <h3>Hola :) bienvenids a tods.</h3>
+                <h3>El propósito del sistema es llevar un mejor control de lo que se está vendiendo en la sala, así que
+                    de favor
+                    registrar todo lo que estén comprando,
+                    aquí también están los precios y puedes escanear el código de barras, sólo vayan a <b>Punto de
+                        Venta</b>
+                    Si alguien desea vender algo y usar el sistema para administrarlo lo puede hacer, sólo de avisar al
+                    administrador para crear un nuevo usuario.
+                </h3>
+                <h3>Igual si quieren usar este espacio para algún anuncio se puede hacer. Grax por comprar <3 </h3>
+            </mat-card-content>
+        </mat-card>
+    </div>
+    <div class="col">
+        <mat-card style="margin: 0% 20%; background-color: #e7fde4;">
+            <mat-card-header>
+                <mat-card-title>Próximos Cumpleaños 🎉</mat-card-title>
+            </mat-card-header>
+            <mat-card-content style="margin: 2%;">
+                <h3>no c
+                </h3>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>
