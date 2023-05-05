@@ -26,7 +26,7 @@
                             <input matInput formControlName="nombre_producto" [matAutocomplete]="auto">
                             <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
                                 <mat-option *ngFor="let producto of filteredOptions | async" [value]="producto"
-                                    (click)="seleccionar(producto)">
+                                    (onSelectionChange)="seleccionar(producto)">
                                     {{ producto.nombre.charAt(0).toUpperCase() + producto.nombre.slice(1) }}
                                 </mat-option>
                             </mat-autocomplete>
