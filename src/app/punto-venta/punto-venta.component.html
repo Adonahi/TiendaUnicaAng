@@ -13,7 +13,7 @@
                     <form [formGroup]="ventaForm" (submit)="buscarPorCodigo()">
                         <mat-form-field hideRequiredMarker>
                             <mat-label>Código de Barras</mat-label>
-                            <input matInput formControlName="codigo_barras" [required]="error">
+                            <input matInput formControlName="codigo_barras" [required]="error" #codigo>
                             <mat-error *ngIf="error">No se encontró ningún producto</mat-error>
                         </mat-form-field>
                         <button type="submit" style="display: none;"></button>

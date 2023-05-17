@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { UntypedFormBuilder, Validators } from '@angular/forms';
 import { Producto } from '../classes/producto.class';
 import { ProductoService } from '../services/producto.service';
@@ -18,6 +18,8 @@ import { AuthService } from '../services/auth.service';
   templateUrl: './punto-venta.component.html'
 })
 export class PuntoVentaComponent implements OnInit {
+
+  @ViewChild('codigo') codigoElement: ElementRef;
 
   compra = false;
   error = false;
@@ -58,6 +60,7 @@ export class PuntoVentaComponent implements OnInit {
 
     obs.subscribe(r => {
       this.productos = r;
+      this.codigoElement.nativeElement.focus()
       this.filteredOptions = this.ventaForm.valueChanges.pipe(
         startWith(''),
         map(value => {
