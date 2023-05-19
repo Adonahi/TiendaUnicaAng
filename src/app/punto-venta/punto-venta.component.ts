@@ -59,8 +59,9 @@ export class PuntoVentaComponent implements OnInit {
       this._productoService.getAll();
 
     obs.subscribe(r => {
+      console.log(r);
       this.productos = r;
-      this.codigoElement.nativeElement.focus()
+      this.codigoElement.nativeElement.focus();
       this.filteredOptions = this.ventaForm.valueChanges.pipe(
         startWith(''),
         map(value => {
@@ -159,6 +160,7 @@ export class PuntoVentaComponent implements OnInit {
         this.productosSeleccionados.push(productoVenta);
       }
       this.dataSource.setData(this.productosSeleccionados);
+      this.codigoElement.nativeElement.focus();
   }
 
   getTotalCost() {

@@ -19,6 +19,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatCardModule } from '@angular/material/card';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 //Terceros
 import { NgxEchartsModule } from 'ngx-echarts';
@@ -77,6 +78,7 @@ import { TicketDialogComponent } from './dialogs/ticket-dialog/ticket-dialog.com
     MatCardModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatGridListModule,
     FlexLayoutModule,
     ReactiveFormsModule,
     HttpClientModule,

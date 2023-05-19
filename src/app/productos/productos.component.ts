@@ -130,7 +130,8 @@ export class ProductosComponent implements AfterViewInit {
           this.productoForm.value['precio_compra'],
           this.productoForm.value['precio_venta'],
           this._authService.usuario.usuario_id,
-          0
+          0,
+          ''
         )) :
         this._productoService.insertar(new Producto(
           0,
@@ -139,7 +140,8 @@ export class ProductosComponent implements AfterViewInit {
           this.productoForm.value['precio_compra'],
           this.productoForm.value['precio_venta'],
           this._authService.usuario.usuario_id,
-          0
+          0,
+          ''
         ));
 
       obs.subscribe((r: any) => {

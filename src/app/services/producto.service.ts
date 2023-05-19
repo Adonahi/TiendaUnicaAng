@@ -9,7 +9,7 @@ import { OPTIONS, PRODUCTO, URL } from './config';
 })
 export class ProductoService {
 
-  producto: Producto = new Producto(0, '', '', 0, 0, 0, 0);
+  producto: Producto = new Producto(0, '', '', 0, 0, 0, 0, '');
   productos: Producto[] = [];
 
   constructor(private http: HttpClient) { }

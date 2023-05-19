@@ -164,7 +164,7 @@ export class EstadisticasComponent implements OnInit {
     this.ventas.forEach(venta =>{
       let fecha = new Date(venta.fecha);
       if (fecha.getTime() >= firstDay.getTime() && fecha.getTime() <= lastDay.getTime()) {
-        ventaPorProducto[venta.nombre] = ventaPorProducto[venta.nombre] ? Number(ventaPorProducto[venta.nombre]) + Number(venta.precio) : Number(venta.precio);
+        ventaPorProducto[venta.nombre] = ventaPorProducto[venta.nombre] ? Number(ventaPorProducto[venta.nombre]) + Number(venta.cantidad) : Number(venta.cantidad);
       }
     })
 

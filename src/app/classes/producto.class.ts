@@ -5,7 +5,8 @@ export class Producto{
     precio_compra: number;
     precio_venta: number;
     usuario_fk: number;
-    existencia: number;    
+    existencia: number;
+    imagen_url: string;
 
     constructor(
         producto_id: number,
@@ -14,7 +15,8 @@ export class Producto{
         precio_compra: number,
         precio_venta: number,
         usuario_fk: number,
-        existencia: number
+        existencia: number,
+        imagen_url: string
     ){
         this.producto_id = producto_id;
         this.nombre = nombre;
@@ -23,5 +25,6 @@ export class Producto{
         this.precio_venta = precio_venta;
         this.usuario_fk = usuario_fk;
         this.existencia = existencia;
+        this.imagen_url = imagen_url;
     }
 }
