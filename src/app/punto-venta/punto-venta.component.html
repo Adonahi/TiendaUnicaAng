@@ -7,97 +7,97 @@
     <hr>
     <div class="row">
         <div class="col">
-            <div class="row">
-                <table style="width: 30%;">
-                    <tr>
-                        <td></td>
-                        <td>
-                            <form [formGroup]="ventaForm" (submit)="buscarPorCodigo()">
-                                <mat-form-field hideRequiredMarker>
-                                    <mat-label>Código de Barras</mat-label>
-                                    <input matInput formControlName="codigo_barras" [required]="error" #codigo>
-                                    <mat-error *ngIf="error">No se encontró ningún producto</mat-error>
-                                </mat-form-field>
-                                <button type="submit" style="display: none;"></button>
-                            </form>
-                        </td>
-                        <td>
-                            <form [formGroup]="ventaForm">
-                                <mat-form-field appearance="fill">
-                                    <mat-label>Nombre del Producto</mat-label>
-                                    <input matInput formControlName="nombre_producto" [matAutocomplete]="auto">
-                                    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
-                                        <mat-option *ngFor="let producto of filteredOptions | async" [value]="producto"
-                                            (onSelectionChange)="seleccionar(producto)">
-                                            {{ producto.nombre.charAt(0).toUpperCase() + producto.nombre.slice(1) }}
-                                        </mat-option>
-                                    </mat-autocomplete>
-                                </mat-form-field>
-                            </form>
-                        </td>
-                    </tr>
-                </table>
+            <div class="d-flex justify-content-center">
+                <form [formGroup]="ventaForm" (submit)="buscarPorCodigo()">
+                    <mat-form-field hideRequiredMarker>
+                        <mat-label>Código de Barras</mat-label>
+                        <input matInput formControlName="codigo_barras" [required]="error" #codigo>
+                        <mat-error *ngIf="error">No se encontró ningún producto</mat-error>
+                    </mat-form-field>
+                    <button type="submit" style="display: none;"></button>
+                </form>
             </div>
             <div class="row" *ngIf="productosSeleccionados.length != 0">
                 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-        
+
                     <ng-container matColumnDef="producto">
                         <th mat-header-cell *matHeaderCellDef>Producto</th>
                         <td mat-cell *matCellDef="let producto">{{ producto.nombre.charAt(0).toUpperCase() +
                             producto.nombre.slice(1) }}</td>
                         <td mat-footer-cell *matFooterCellDef></td>
                     </ng-container>
-        
+
                     <ng-container matColumnDef="precio_unitario">
                         <th mat-header-cell *matHeaderCellDef>Precio Unitario</th>
-                        <td mat-cell *matCellDef="let producto">{{ (compra ? producto.precio_compra : producto.precio_venta) | currency }}</td>
+                        <td mat-cell *matCellDef="let producto">{{ (compra ? producto.precio_compra :
+                            producto.precio_venta) | currency }}</td>
                         <td mat-footer-cell *matFooterCellDef></td>
                     </ng-container>
-        
+
                     <ng-container matColumnDef="cantidad">
                         <th mat-header-cell *matHeaderCellDef>Cantidad</th>
                         <td mat-cell *matCellDef="let producto; let i = index">
-                            <input type="number" min="1" step="1" matInput [(ngModel)]="productosSeleccionados[i].cantidad"
-                                (change)="cambiarCantidad(i)">
+                            <input type="number" min="1" step="1" matInput
+                                [(ngModel)]="productosSeleccionados[i].cantidad" (change)="cambiarCantidad(i)">
                             <mat-error *ngIf="this.productosSeleccionados[i].cantidad < 1">????</mat-error>
                         </td>
                         <td mat-footer-cell *matFooterCellDef><b>Total</b></td>
                     </ng-container>
-        
+
                     <ng-container matColumnDef="total_row">
                         <th mat-header-cell *matHeaderCellDef>Total</th>
-                        <td mat-cell *matCellDef="let producto; let i = index">{{ productosSeleccionados[i].precio | currency }}
+                        <td mat-cell *matCellDef="let producto; let i = index">{{ productosSeleccionados[i].precio |
+                            currency }}
                         </td>
                         <td mat-footer-cell *matFooterCellDef><b>{{ getTotalCost() | currency }}</b></td>
                     </ng-container>
-        
+
                     <ng-container matColumnDef="quitar">
                         <th mat-header-cell *matHeaderCellDef></th>
                         <td mat-cell *matCellDef="let producto; let i = index"><button mat-mini-fab color="warn"
                                 matTooltip="Quitar" (click)="quitar(i)"><mat-icon>remove</mat-icon></button></td>
                         <td mat-footer-cell *matFooterCellDef></td>
                     </ng-container>
-        
+
                     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                     <tr mat-row *matRowDef="let producto; columns: displayedColumns;"></tr>
                     <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
                 </table>
                 <div style="margin-top: 2%;" align="right">
-                    <button mat-fab extended color="primary" (click)="terminarCompra()"><mat-icon>shopping_cart</mat-icon>Terminar</button>
+                    <button mat-fab extended color="primary"
+                        (click)="terminarCompra()"><mat-icon>shopping_cart</mat-icon>Terminar</button>
                 </div>
             </div>
         </div>
         <div class="col">
+            <form [formGroup]="ventaForm" class="d-flex justify-content-center">
+                <mat-form-field appearance="fill">
+                    <mat-label>Nombre del Producto</mat-label>
+                    <input matInput formControlName="nombre_producto">
+                    <!--[matAutocomplete]="auto">
+                    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+                        <mat-option *ngFor="let producto of filteredOptions | async" [value]="producto"
+                            (onSelectionChange)="seleccionar(producto)">
+                            {{ producto.nombre.charAt(0).toUpperCase() + producto.nombre.slice(1) }}
+                        </mat-option>
+                    </mat-autocomplete-->
+                </mat-form-field>
+            </form>
             <div style="height: 75vh; overflow-y: scroll;">
                 <mat-grid-list cols="2" rowHeight="2:2">
-                    <mat-grid-tile *ngFor="let producto of productos">
-                        <mat-card style="background-color: #ede9fd; margin: 6%; cursor: pointer; height: 90%; width: 100%;" (click)="seleccionar(producto)">
+                    <mat-grid-tile *ngFor="let producto of filteredOptions | async">
+                        <mat-card
+                            style="background-color: #ede9fd; margin: 6%; cursor: pointer; height: 90%; width: 100%;"
+                            (click)="seleccionar(producto)">
                             <mat-card-header style="height: 20%;">
-                                <mat-card-title>{{ producto.nombre.charAt(0).toUpperCase() + producto.nombre.slice(1) }}</mat-card-title>
-                                <mat-card-subtitle>{{ (compra ? producto.precio_compra : producto.precio_venta) | currency }}</mat-card-subtitle>
+                                <mat-card-title>{{ producto.nombre.charAt(0).toUpperCase() + producto.nombre.slice(1)
+                                    }}</mat-card-title>
+                                <mat-card-subtitle>{{ (compra ? producto.precio_compra : producto.precio_venta) |
+                                    currency }}</mat-card-subtitle>
                             </mat-card-header>
-                            <img mat-card-image src="{{ producto.imagen_url }}" alt="{{ producto.nombre }}" style="width: 100%; height: 80%; object-fit: cover;">
-                            
+                            <img mat-card-image src="{{ producto.imagen_url }}" alt="{{ producto.nombre }}"
+                                style="width: 100%; height: 80%; object-fit: cover;">
+
                         </mat-card>
                     </mat-grid-tile>
                 </mat-grid-list>

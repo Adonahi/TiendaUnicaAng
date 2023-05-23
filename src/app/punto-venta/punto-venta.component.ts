@@ -64,8 +64,8 @@ export class PuntoVentaComponent implements OnInit {
       this.filteredOptions = this.ventaForm.valueChanges.pipe(
         startWith(''),
         map(value => {
-          const name = value ? value.nombre_producto.length >= 1 ? value.nombre_producto : null : null;
-          return name ? this._filter(name as string) : [];
+          const name = typeof value === 'string' ? value : value?.nombre_producto;
+          return name ? this._filter(name as string) : this.productos.slice();
         })
       )
     });
@@ -131,7 +131,7 @@ export class PuntoVentaComponent implements OnInit {
   }
 
   seleccionar(producto: Producto) {
-    this.ventaForm.patchValue({ nombre_producto: '', codigo_barras: '' });
+    //this.ventaForm.patchValue({ nombre_producto: '', codigo_barras: '' });
       let productoVenta = {
         existencia: Number(producto.existencia),
         nombre: producto.nombre,
@@ -211,6 +211,7 @@ export class PuntoVentaComponent implements OnInit {
         .afterClosed()
         .subscribe(() => {
           this.productosSeleccionados = [];
+          this.ventaForm.patchValue({ nombre_producto: '', codigo_barras: '' });
         })
     });
   }
