@@ -1,4 +1,4 @@
-<mat-card style="margin: 10% 25%;">
+<mat-card style="margin: 10% 25%;" fxShow="true" fxHide.lt-md="true">
     <mat-card-header>
         <mat-card-title>Iniciar Sesión</mat-card-title>
     </mat-card-header>
@@ -19,6 +19,36 @@
             <br>
             <button mat-raised-button color="accent" type="submit">Iniciar Sesión</button>
             &nbsp;
+            <i *ngIf="error" style="color: crimson;">{{ mensaje }}</i>
+        </form>
+    </mat-card-content>
+    <mat-card-footer>
+        <mat-progress-bar *ngIf="cargando" mode="indeterminate"></mat-progress-bar>
+    </mat-card-footer>
+</mat-card>
+
+<mat-card style="margin: 5%;" fxShow="true" fxHide.gt-sm="true">
+    <mat-card-header>
+        <mat-card-title>Iniciar Sesión</mat-card-title>
+    </mat-card-header>
+    <mat-card-content style="margin-bottom: 5%;">
+        <br>
+        <form [formGroup]="loginForm" (submit)="iniciarSesion()">
+            <mat-form-field style="display: grid;" hideRequiredMarker>
+                <mat-label>Correo Electrónico</mat-label>
+                <input matInput type="email" formControlName="email">
+                <mat-error *ngIf="loginForm.get('email')?.hasError('required')">El correo es requerido</mat-error>
+                <mat-error *ngIf="loginForm.get('email')?.hasError('email')">Formato inválido</mat-error>
+            </mat-form-field>
+            <mat-form-field style="display: grid;" hideRequiredMarker>
+                <mat-label>Contraseña</mat-label>
+                <input matInput type="password" formControlName="password">
+                <mat-error *ngIf="loginForm.get('password')?.hasError('required')">La contraseña es requerida</mat-error>
+            </mat-form-field>
+            <div class="d-flex justify-content-center">
+                <button mat-raised-button color="accent" type="submit">Iniciar Sesión</button>
+            </div>
+            <br *ngIf="error">
             <i *ngIf="error" style="color: crimson;">{{ mensaje }}</i>
         </form>
     </mat-card-content>

@@ -174,7 +174,7 @@
     </mat-card-content>
 </mat-card>
 
-<div class="row" style="margin-top: 2%;">
+<div class="row" style="margin-top: 2%;" fxShow="true" fxHide.lt-md="true">
     <div class="col">
         <mat-card style="margin: 0% 10%;">
             <mat-card-header>
@@ -203,5 +203,40 @@
                 <h3 *ngFor="let cumple of cumples | keyvalue: ordenar" id="{{ cumple.key }}"><b>{{ cumple.key }}:</b> {{ cumple.value | date:'MMMM d' }} </h3>
             </mat-card-content>
         </mat-card>
+    </div>
+</div>
+<div fxShow="true" fxHide.gt-sm="true">
+    <div class="row">
+        <div class="col">
+            <mat-card style="margin: 5%; background-color: #e7fde4;">
+                <mat-card-header>
+                    <mat-card-title>Próximos Cumpleaños 🎉</mat-card-title>
+                </mat-card-header>
+                <mat-card-content style="margin: 2%;">
+                    <h3 *ngFor="let cumple of cumples | keyvalue: ordenar" id="{{ cumple.key }}"><b>{{ cumple.key }}:</b> {{ cumple.value | date:'MMMM d' }} </h3>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <mat-card style="margin: 5%;">
+                <mat-card-header>
+                    <mat-card-title>Inicio</mat-card-title>
+                </mat-card-header>
+                <mat-card-content style="margin: 2%;">
+                    <h3>Hola :) bienvenids a tods.</h3>
+                    <h3>El propósito del sistema es llevar un mejor control de lo que se está vendiendo en la sala, así que
+                        de favor
+                        registrar todo lo que estén comprando,
+                        aquí también están los precios y puedes escanear el código de barras, sólo vayan a <b>Punto de
+                            Venta</b>
+                        Si alguien desea vender algo y usar el sistema para administrarlo lo puede hacer, sólo de avisar al
+                        administrador para crear un nuevo usuario.
+                    </h3>
+                    <h3>Igual si quieren usar este espacio para algún anuncio se puede hacer. Grax por comprar <3 </h3>
+                </mat-card-content>
+            </mat-card>
+        </div>
     </div>
 </div>

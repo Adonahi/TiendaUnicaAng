@@ -1,4 +1,4 @@
-<div class="marco">
+<div class="marco" fxShow="true" fxHide.lt-md="true">
     <div class="row">
         <div class="col">
             <h1>{{ compra ? "Registro de Compras" : "Punto de Venta" }}</h1>
@@ -7,14 +7,14 @@
     <hr>
     <div class="row">
         <div class="col">
-                <form [formGroup]="ventaForm" (submit)="buscarPorCodigo()">
-                    <mat-form-field hideRequiredMarker style="width: 100%;">
-                        <mat-label>Código de Barras</mat-label>
-                        <input matInput formControlName="codigo_barras" [required]="error" #codigo>
-                        <mat-error *ngIf="error">No se encontró ningún producto</mat-error>
-                    </mat-form-field>
-                    <button type="submit" style="display: none;"></button>
-                </form>
+            <form [formGroup]="ventaForm" (submit)="buscarPorCodigo()">
+                <mat-form-field hideRequiredMarker style="width: 100%;">
+                    <mat-label>Código de Barras</mat-label>
+                    <input matInput formControlName="codigo_barras" [required]="error" #codigo>
+                    <mat-error *ngIf="error">No se encontró ningún producto</mat-error>
+                </mat-form-field>
+                <button type="submit" style="display: none;"></button>
+            </form>
             <div class="row" *ngIf="productosSeleccionados.length != 0">
                 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
@@ -94,7 +94,8 @@
                                     currency }}</mat-card-subtitle>
                             </mat-card-header>
                             <img mat-card-image src="{{ producto.imagen_url }}" alt="{{ producto.nombre }}"
-                                style="width: 100%; height: 70%; object-fit: cover;" onerror="this.onerror=null;this.src='https://material.angular.io/assets/img/examples/shiba2.jpg';">
+                                style="width: 100%; height: 70%; object-fit: cover;"
+                                onerror="this.onerror=null;this.src='https://material.angular.io/assets/img/examples/shiba2.jpg';">
 
                         </mat-card>
                     </mat-grid-tile>
@@ -102,3 +103,97 @@
             </div>
         </div>
     </div>
+</div>
+<div class="marco-mobiles" fxShow="true" fxHide.gt-sm="true">
+    <div class="row">
+        <div class="col">
+            <h1>{{ compra ? "Registro de Compras" : "Punto de Venta" }}</h1>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <form [formGroup]="ventaForm">
+            <mat-form-field appearance="fill" style="width: 100%;">
+                <mat-label>Buscar Producto</mat-label>
+                <input matInput formControlName="nombre_producto">
+            </mat-form-field>
+        </form>
+        <div style="overflow-x: scroll;">
+            <table style="height: 10%;">
+                <tr style="height: 100%;">
+                    <th *ngFor="let producto of filteredOptions | async" style="padding: 0 2vw;">
+                        <mat-card style="background-color: #ede9fd;cursor: pointer; height: 80%; width: 50vw;"
+                            (click)="seleccionar(producto)">
+                            <mat-card-header>
+                                <mat-card-title>{{ producto.nombre.charAt(0).toUpperCase() + producto.nombre.slice(1) | slice:0:14
+                                    }}</mat-card-title>
+                                <mat-card-subtitle>{{ (compra ? producto.precio_compra : producto.precio_venta) |
+                                    currency }}</mat-card-subtitle>
+                            </mat-card-header>
+                            <img mat-card-image src="{{ producto.imagen_url }}" alt="{{ producto.nombre }}"
+                                style="width: 100%; height: 70%; object-fit: cover;"
+                                onerror="this.onerror=null;this.src='https://material.angular.io/assets/img/examples/shiba2.jpg';">
+    
+                        </mat-card>
+                    </th>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="row" *ngIf="productosSeleccionados.length != 0">
+        <div style="position: relative; min-height: 30vh; max-height: 70vh; overflow: auto;">
+            <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+                <ng-container matColumnDef="producto">
+                    <th mat-header-cell *matHeaderCellDef>Producto</th>
+                    <td mat-cell *matCellDef="let producto">{{ producto.nombre.charAt(0).toUpperCase() +
+                        producto.nombre.slice(1) }}</td>
+                    <td mat-footer-cell *matFooterCellDef></td>
+                </ng-container>
+
+                <ng-container matColumnDef="precio_unitario">
+                    <th mat-header-cell *matHeaderCellDef>Precio Unitario</th>
+                    <td mat-cell *matCellDef="let producto">{{ (compra ? producto.precio_compra :
+                        producto.precio_venta) | currency }}</td>
+                    <td mat-footer-cell *matFooterCellDef></td>
+                </ng-container>
+
+                <ng-container matColumnDef="cantidad">
+                    <th mat-header-cell *matHeaderCellDef>Cantidad</th>
+                    <td mat-cell *matCellDef="let producto; let i = index">
+                        <input type="number" min="1" step="1" matInput [(ngModel)]="productosSeleccionados[i].cantidad"
+                            (change)="cambiarCantidad(i)" style="width: 10vw;">
+                        <mat-error *ngIf="this.productosSeleccionados[i].cantidad < 1">????</mat-error>
+                    </td>
+                    <td mat-footer-cell *matFooterCellDef><b>Total</b></td>
+                </ng-container>
+
+                <ng-container matColumnDef="total_row">
+                    <th mat-header-cell *matHeaderCellDef>Total</th>
+                    <td mat-cell *matCellDef="let producto; let i = index">{{ productosSeleccionados[i].precio |
+                        currency }}
+                    </td>
+                    <td mat-footer-cell *matFooterCellDef><b>{{ getTotalCost() | currency }}</b></td>
+                </ng-container>
+
+                <ng-container matColumnDef="quitar">
+                    <th mat-header-cell *matHeaderCellDef></th>
+                    <td mat-cell *matCellDef="let producto; let i = index"><button mat-mini-fab color="warn"
+                            matTooltip="Quitar" (click)="quitar(i)"><mat-icon>remove</mat-icon></button></td>
+                    <td mat-footer-cell *matFooterCellDef></td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let producto; columns: displayedColumns;"></tr>
+                <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
+            </table>
+        </div>
+        <div align="right">
+            <button mat-fab extended color="primary"
+                (click)="terminarCompra()"><mat-icon>shopping_cart</mat-icon>Terminar</button>
+        </div>
+    </div>
+
+
+
+</div>
