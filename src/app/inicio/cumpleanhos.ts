@@ -1,0 +1,18 @@
+export const CUMPLES = {
+    "Carlos": new Date(new Date().getFullYear(), 0, 14),
+    //"Luz": new Date(new Date().getFullYear(), 0, 19),
+    "Luz": new Date(new Date().getFullYear(), 4, 26),
+    "Lechuga": new Date(new Date().getFullYear(), 3, 29),
+    "Inge Sergio": new Date(new Date().getFullYear(), 4, 3),
+    "Alfredo": new Date(new Date().getFullYear(), 5, 2),
+    "Bruno": new Date(new Date().getFullYear(), 5, 5),
+    "Gustavo": new Date(new Date().getFullYear(), 5, 22),
+    "Dona": new Date(new Date().getFullYear(), 5, 26),
+    "Jessi": new Date(new Date().getFullYear(), 6, 5),
+    "Emilio": new Date(new Date().getFullYear(), 6, 13),
+    "Caro": new Date(new Date().getFullYear(), 6, 19),
+    "Diego": new Date(new Date().getFullYear(), 7, 23),
+    "Alexis": new Date(new Date().getFullYear(), 9, 24),
+    "Astrid": new Date(new Date().getFullYear(), 10, 16),
+    "Kendra": new Date(new Date().getFullYear(), 11, 7),
+}

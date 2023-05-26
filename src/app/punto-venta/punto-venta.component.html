@@ -7,16 +7,14 @@
     <hr>
     <div class="row">
         <div class="col">
-            <div class="d-flex justify-content-center">
                 <form [formGroup]="ventaForm" (submit)="buscarPorCodigo()">
-                    <mat-form-field hideRequiredMarker>
+                    <mat-form-field hideRequiredMarker style="width: 100%;">
                         <mat-label>Código de Barras</mat-label>
                         <input matInput formControlName="codigo_barras" [required]="error" #codigo>
                         <mat-error *ngIf="error">No se encontró ningún producto</mat-error>
                     </mat-form-field>
                     <button type="submit" style="display: none;"></button>
                 </form>
-            </div>
             <div class="row" *ngIf="productosSeleccionados.length != 0">
                 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
@@ -70,9 +68,9 @@
             </div>
         </div>
         <div class="col">
-            <form [formGroup]="ventaForm" class="d-flex justify-content-center">
-                <mat-form-field appearance="fill">
-                    <mat-label>Nombre del Producto</mat-label>
+            <form [formGroup]="ventaForm">
+                <mat-form-field appearance="fill" style="width: 100%;">
+                    <mat-label>Buscar Producto</mat-label>
                     <input matInput formControlName="nombre_producto">
                     <!--[matAutocomplete]="auto">
                     <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
@@ -89,14 +87,14 @@
                         <mat-card
                             style="background-color: #ede9fd; margin: 6%; cursor: pointer; height: 90%; width: 100%;"
                             (click)="seleccionar(producto)">
-                            <mat-card-header style="height: 20%;">
+                            <mat-card-header>
                                 <mat-card-title>{{ producto.nombre.charAt(0).toUpperCase() + producto.nombre.slice(1)
                                     }}</mat-card-title>
                                 <mat-card-subtitle>{{ (compra ? producto.precio_compra : producto.precio_venta) |
                                     currency }}</mat-card-subtitle>
                             </mat-card-header>
                             <img mat-card-image src="{{ producto.imagen_url }}" alt="{{ producto.nombre }}"
-                                style="width: 100%; height: 80%; object-fit: cover;">
+                                style="width: 100%; height: 70%; object-fit: cover;" onerror="this.onerror=null;this.src='https://material.angular.io/assets/img/examples/shiba2.jpg';">
 
                         </mat-card>
                     </mat-grid-tile>

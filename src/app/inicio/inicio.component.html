@@ -200,22 +200,7 @@
                 <mat-card-title>Próximos Cumpleaños 🎉</mat-card-title>
             </mat-card-header>
             <mat-card-content style="margin: 2%;">
-                <h3><b>Alfredo:</b> 2 de junio</h3>
-                <h3><b>Bruno:</b> 5 de junio</h3>
-                <h3><b>Gustavo:</b> 22 de junio</h3>
-                <h3><b>Dona:</b> 26 de junio</h3>
-                <h3><b>Jessi:</b> 5 de julio</h3>
-                <h3><b>Emilio:</b> 13 de julio</h3>
-                <h3><b>Caro:</b> 19 de julio</h3>
-                <h3><b>Diego:</b> 23 de agosto</h3>
-                <h3><b>Dirce:</b> 26 de septiembre</h3>
-                <h3><b>Alexis:</b> 24 de octubre</h3>
-                <h3><b>Astrid:</b> 16 de noviembre</h3>
-                <h3><b>Kendra:</b> 7 de diciembre</h3>
-                <h3><b>Carlos:</b> 14 de enero</h3>
-                <h3><b>Luz:</b> 19 de enero</h3>
-                <h3><b>Lechuga:</b> 29 de abril </h3>
-                <h3><b>El Inge:</b> 3 de mayo </h3>
+                <h3 *ngFor="let cumple of cumples | keyvalue: ordenar" id="{{ cumple.key }}"><b>{{ cumple.key }}:</b> {{ cumple.value | date:'MMMM d' }} </h3>
             </mat-card-content>
         </mat-card>
     </div>
