@@ -180,14 +180,10 @@ export class EstadisticasComponent implements OnInit {
       tooltip: {
         trigger: 'item'
       },
-      legend: {
-        top: '15%',
-        left: 'center'
-      },
       series: [
         {
           name: 'Ventas Por Producto',
-          top: '30%',
+          top: '10%',
           type: 'pie',
           radius: ['55%', '90%'],
           avoidLabelOverlap: false,
@@ -203,7 +199,7 @@ export class EstadisticasComponent implements OnInit {
           emphasis: {
             label: {
               show: true,
-              fontSize: 20,
+              fontSize: 15,
               fontWeight: 'bold'
             }
           },
