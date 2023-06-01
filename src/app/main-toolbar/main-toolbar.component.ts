@@ -27,7 +27,7 @@ export class MainToolbarComponent implements OnInit{
   }
 
   lanzarSnackBar(){
-    this._snackBar.open(MENSAJES[Math.floor(Math.random() * 7)], undefined, { duration: 1500})
+    this._snackBar.open(MENSAJES[Math.floor(Math.random() * 8)], undefined, { duration: 1500})
   }
 
   logout(){

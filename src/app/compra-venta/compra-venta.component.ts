@@ -34,14 +34,16 @@ export class CompraVentaComponent implements AfterViewInit {
   ];
 
   isLoadingResults: boolean = false;
-  dataSource = new MatTableDataSource();
+  dataSource1 = new MatTableDataSource();
+  dataSource2 = new MatTableDataSource();
 
   range = new FormGroup({
     start: new FormControl<Date | null>(null),
     end: new FormControl<Date | null>(null),
   });
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild('paginator1') paginator1: MatPaginator;
+  @ViewChild('paginator2') paginator2: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   constructor(
     public dialog: MatDialog,
@@ -54,7 +56,8 @@ export class CompraVentaComponent implements AfterViewInit {
     this.titulo = this._router.url == '/compras' ? "Compras" : "Ventas";
     
     this.range.valueChanges.subscribe(() => {
-      this.dataSource.data = this.productos;
+      this.dataSource1.data = this.productos;
+      this.dataSource2.data = this.productos;
       if (this.range.value.start && this.range.value.end) {
         this.filtrar(this.datePipe.transform(this.range.value.start, 'yyyy-MM-dd'), this.datePipe.transform(this.range.value.end, 'yyyy-MM-dd'))
       }
@@ -68,9 +71,12 @@ export class CompraVentaComponent implements AfterViewInit {
     obs.subscribe((productos: any[]) => {
       this.productosFiltrados = this.productos = productos;
       this.isLoadingResults = true;
-      this.dataSource.data = productos;
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
+      this.dataSource1.data = productos;
+      this.dataSource2.data = productos;
+      this.dataSource1.paginator = this.paginator1;
+      this.dataSource2.paginator = this.paginator2;
+      this.dataSource1.sort = this.sort;
+      this.dataSource2.sort = this.sort;
       this.isLoadingResults = false;
     });
   }
@@ -99,7 +105,8 @@ export class CompraVentaComponent implements AfterViewInit {
         this.productosFiltrados.push(producto);
       }
     });
-    this.dataSource.data = this.productosFiltrados;
+    this.dataSource1.data = this.productosFiltrados;
+    this.dataSource2.data = this.productosFiltrados;
   }
 
 }

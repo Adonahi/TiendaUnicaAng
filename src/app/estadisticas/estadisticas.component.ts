@@ -67,7 +67,7 @@ export class EstadisticasComponent implements OnInit {
     let first = (this.todayGanancias.getDate() - this.todayGanancias.getDay()) + 1;
 
     let firstDay = new Date(this.todayGanancias.setDate(first));
-    let lastDay = new Date(this.todayGanancias.setDate(first + 6))
+    let lastDay = new Date(firstDay.getTime() + 518400000);
 
     firstDay.setHours(0, 0, 0, 0);
     lastDay.setHours(23, 59, 59, 999);
@@ -97,9 +97,11 @@ export class EstadisticasComponent implements OnInit {
         }
       },
       legend: {
+        top: '18%',
         data: ['Ventas', 'Ganancias']
       },
       grid: {
+        top: '30%',
         left: '3%',
         right: '4%',
         bottom: '3%',
@@ -153,7 +155,7 @@ export class EstadisticasComponent implements OnInit {
     let first = (this.todayVentasPorProducto.getDate() - this.todayVentasPorProducto.getDay()) + 1;
 
     let firstDay = new Date(this.todayVentasPorProducto.setDate(first));
-    let lastDay = new Date(this.todayVentasPorProducto.setDate(first + 6))
+    let lastDay = new Date(firstDay.getTime() + 518400000)
 
     firstDay.setHours(0, 0, 0, 0);
     lastDay.setHours(23, 59, 59, 999);
@@ -222,7 +224,7 @@ export class EstadisticasComponent implements OnInit {
     let first = (this.todayVentasVsCompras.getDate() - this.todayVentasVsCompras.getDay()) + 1;
 
     let firstDay = new Date(this.todayVentasVsCompras.setDate(first));
-    let lastDay = new Date(this.todayVentasVsCompras.setDate(first + 6))
+    let lastDay = new Date(firstDay.getTime() + 518400000)
 
     firstDay.setHours(0, 0, 0, 0);
     lastDay.setHours(23, 59, 59, 999);

@@ -1,4 +1,4 @@
-<div class="marco">
+<div class="marco" fxShow="true" fxHide.lt-md="true">
     <div class="row">
         <div class="col">
             <h1>Estadísticas</h1>
@@ -66,3 +66,75 @@
             </mat-card>
         </div>
     </div>
+</div>
+<div class="marco-mobiles" fxShow="true" fxHide.gt-sm="true">
+    <div class="row">
+        <div class="col">
+            <h1>Estadísticas</h1>
+        </div>
+    </div>
+    <div class="row">
+    </div>
+    <div class="row">
+        <div class="col">
+            <mat-card>
+                <mat-card-content>
+                    <div echarts [options]="ventasGananciasChartOptions"></div>
+                    <hr>
+                </mat-card-content>
+                <mat-card-actions style="color:slategrey;">
+                    <button mat-icon-button matTooltip="Semana Anterior" color="primary"
+                        (click)="ventasGananciasChart(-7)"><mat-icon>keyboard_arrow_left</mat-icon></button>
+                    <span style="flex: 1 1 auto"></span>
+                    <h3 style="text-align: center;">Total de ventas: {{ getTotal(ventasSemana) | currency }}</h3>
+                    <span style="flex: 1 1 auto"></span>
+                    <h3 style="text-align: center;">Total de ganancias: {{ getTotal(gananciasSemana) | currency }}</h3>
+                    <span style="flex: 1 1 auto"></span>
+                    <button mat-icon-button matTooltip="Semana Siguiente" color="primary"
+                        (click)="ventasGananciasChart(7)"><mat-icon>keyboard_arrow_right</mat-icon></button>
+                </mat-card-actions>
+            </mat-card>
+        </div>
+    </div>
+    <br><br>
+    <div class="row">
+        <div class="col">
+            <mat-card>
+                <mat-card-content>
+                    <div echarts [options]="ventasPorProductoChartOptions"></div>
+                    <hr>
+                </mat-card-content>
+                <mat-card-actions style="color:slategrey;">
+                    <button mat-icon-button matTooltip="Semana Anterior" color="primary"
+                        (click)="ventasPorProductoChart(-7)"><mat-icon>keyboard_arrow_left</mat-icon></button>
+                    <span style="flex: 1 1 auto"></span>
+                    <button mat-icon-button matTooltip="Semana Siguiente" color="primary"
+                        (click)="ventasPorProductoChart(7)"><mat-icon>keyboard_arrow_right</mat-icon></button>
+                </mat-card-actions>
+            </mat-card>
+            <br><br>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <mat-card>
+                <mat-card-content>
+                    <div echarts [options]="ventasVsComprasChartOptions"></div>
+                    <hr>
+                </mat-card-content>
+                <mat-card-actions style="color:slategrey;">
+                    <button mat-icon-button matTooltip="Semana Anterior" color="primary"
+                        (click)="ventasVsComprasChart(-7)"><mat-icon>keyboard_arrow_left</mat-icon></button>
+                    <span style="flex: 1 1 auto"></span>
+                    <i *ngIf="porcentajeVentas <= 10" class="bi bi-emoji-frown" style="font-size: 3em; color: #ee6666;"></i>
+                    <i *ngIf="porcentajeVentas > 10 && porcentajeVentas <= 45" class="bi bi-emoji-neutral" style="font-size: 3em; color: #fac858;"></i>
+                    <i *ngIf="porcentajeVentas > 45 && porcentajeVentas <= 65" class="bi bi-emoji-smile" style="font-size: 3em; color: #91cc75;"></i>
+                    <i *ngIf="porcentajeVentas > 65" class="bi bi-emoji-laughing" style="font-size: 3em; color: #73c0de;"></i>
+                    <span style="flex: 1 1 auto"></span>
+                    <button mat-icon-button matTooltip="Semana Siguiente" color="primary"
+                        (click)="ventasVsComprasChart(7)"><mat-icon>keyboard_arrow_right</mat-icon></button>
+                </mat-card-actions>
+            </mat-card>
+        </div>
+    </div>
+</div>

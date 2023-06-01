@@ -1,7 +1,6 @@
 export const CUMPLES = {
     "Carlos": new Date(new Date().getFullYear(), 0, 14),
-   //"Luz": new Date(new Date().getFullYear(), 0, 19),
-    "Luz": new Date(new Date().getFullYear(), 4, 29),
+    "Luz": new Date(new Date().getFullYear(), 0, 19),
     "Lechuga": new Date(new Date().getFullYear(), 3, 29),
     "Inge Sergio": new Date(new Date().getFullYear(), 4, 3),
     "Alfredo": new Date(new Date().getFullYear(), 5, 2),

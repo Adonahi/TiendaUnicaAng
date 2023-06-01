@@ -1,7 +1,10 @@
-import { NgModule } from '@angular/core';
+import { NgModule, LOCALE_ID, DEFAULT_CURRENCY_CODE } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { HttpClientModule } from '@angular/common/http';
+import localeEsMx from '@angular/common/locales/es-MX';
+import { registerLocaleData } from '@angular/common';
+registerLocaleData(localeEsMx, 'es');
 
 //Angular Material
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -89,7 +92,15 @@ import { TicketDialogComponent } from './dialogs/ticket-dialog/ticket-dialog.com
   ],
   providers: [
     CurrencyPipe,
-    DatePipe
+    DatePipe,
+    {
+      provide: LOCALE_ID,
+      useValue: 'es-Mx'
+    },
+    {
+      provide: DEFAULT_CURRENCY_CODE, 
+      useValue: 'MXN'
+    }
   ],
   bootstrap: [AppComponent]
 })

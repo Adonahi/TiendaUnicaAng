@@ -12,6 +12,7 @@ import { CurrencyPipe } from '@angular/common';
 import { Router } from '@angular/router';
 import { CompraService } from '../services/compra.service';
 import { AuthService } from '../services/auth.service';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-punto-venta',
@@ -35,6 +36,7 @@ export class PuntoVentaComponent implements OnInit {
     'quitar'
   ];
   dataSource = new ProductoDataSource(this.productosSeleccionados);
+  emptyData = new MatTableDataSource([{ empty: "row" }]);
 
   ventaForm = this._formBuilder.group({
     nombre_producto: [''],

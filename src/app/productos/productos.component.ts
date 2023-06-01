@@ -36,8 +36,8 @@ export class ProductosComponent implements AfterViewInit {
   ];
 
   isLoadingResults: boolean = false;
-  dataSource = new MatTableDataSource();
-
+  dataSource1 = new MatTableDataSource();
+  dataSource2 = new MatTableDataSource();
 
   productoForm = this._formBuilder.group({
     producto_id: [''],
@@ -47,7 +47,8 @@ export class ProductosComponent implements AfterViewInit {
     precio_venta: ['', Validators.required]
   });
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild('paginator1') paginator1: MatPaginator;
+  @ViewChild('paginator2') paginator2: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   constructor(
     public dialog: MatDialog,
@@ -66,9 +67,12 @@ export class ProductosComponent implements AfterViewInit {
     this._productoService.getPorUsuario(this._authService.usuario.usuario_id)
       .subscribe((productos: Producto[]) => {
         this.isLoadingResults = true;
-        this.dataSource.data = productos;
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
+        this.dataSource1.data = productos;
+        this.dataSource2.data = productos
+        this.dataSource1.paginator = this.paginator1;
+        this.dataSource2.paginator = this.paginator2;
+        this.dataSource1.sort = this.sort;
+        this.dataSource2.sort = this.sort;
         this.isLoadingResults = false;
       });
 

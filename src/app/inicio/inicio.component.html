@@ -200,7 +200,7 @@
                 <mat-card-title>Próximos Cumpleaños 🎉</mat-card-title>
             </mat-card-header>
             <mat-card-content style="margin: 2%;">
-                <h3 *ngFor="let cumple of cumples | keyvalue: ordenar" id="{{ cumple.key }}"><b>{{ cumple.key }}:</b> {{ cumple.value | date:'MMMM d' }} </h3>
+                <h3 *ngFor="let cumple of cumples | keyvalue: ordenar" id="{{ cumple.key }}"><b>{{ cumple.key }}:</b> {{ cumple.value | date:'d \'de\' MMMM' }} </h3>
             </mat-card-content>
         </mat-card>
     </div>
@@ -213,7 +213,7 @@
                     <mat-card-title>Próximos Cumpleaños 🎉</mat-card-title>
                 </mat-card-header>
                 <mat-card-content style="margin: 2%;">
-                    <h3 *ngFor="let cumple of cumples | keyvalue: ordenar" id="{{ cumple.key }}"><b>{{ cumple.key }}:</b> {{ cumple.value | date:'MMMM d' }} </h3>
+                    <h3 *ngFor="let cumple of cumples | keyvalue: ordenar" id="{{ cumple.key }}"><b>{{ cumple.key }}:</b> {{ cumple.value | date:'d \'de\' MMMM' }} </h3>
                 </mat-card-content>
             </mat-card>
         </div>
